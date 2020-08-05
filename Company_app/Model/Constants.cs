@@ -7,5 +7,6 @@ namespace Company_app.Model
         private const string passwordMaster = "WPFAccess";
         internal const string usernamedMaster = "WPFMaster";
         internal readonly string passwordEmployeeHashed = SecurePasswordHasher.Hash(passwordMaster);
+        
     }
 }

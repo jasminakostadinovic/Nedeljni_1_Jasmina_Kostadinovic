@@ -18,10 +18,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Column="1" Grid.Row="3" Name="EmployeesGrid" AutoGenerateColumns="True" HorizontalAlignment="Center" 
+        <DataGrid Grid.Column="1" Grid.Row="3" Name="AdministratorGrid" AutoGenerateColumns="True" HorizontalAlignment="Center" 
                   IsReadOnly="True" Height="400" VerticalAlignment="Top" 
                   Width="790" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"
-                  ItemsSource="{Binding Employees}" SelectedItem="{Binding Employee}" SelectionMode="Single">
+                  ItemsSource="{Binding Administrators}" SelectedItem="{Binding Administrator}" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTemplateColumn  Width="auto">
                     <DataGridTemplateColumn.CellTemplate>

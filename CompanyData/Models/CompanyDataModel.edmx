@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CompanyManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAdministrators">
+          <Key>
+            <PropertyRef Name="AdministratorID" />
+          </Key>
+          <Property Name="AdministratorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserDataID" Type="int" Nullable="false" />
+          <Property Name="ExpirationAccountDate" Type="datetime" Nullable="false" />
+          <Property Name="AdministratorTeam" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblEmployees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserDataID" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sector" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfessionalQualificationsLevel" Type="nvarchar" MaxLength="50" />
+          <Property Name="YearsOfService" Type="int" />
+        </EntityType>
+        <EntityType Name="tblManagers">
+          <Key>
+            <PropertyRef Name="ManagerID" />
+          </Key>
+          <Property Name="ManagerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserDataID" Type="int" Nullable="false" />
+          <Property Name="LevelOfResponsibility" Type="int" />
+          <Property Name="PasswordHint" Type="char" MaxLength="1000" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OfficeNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProjectsCount" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="tblUserData">
+          <Key>
+            <PropertyRef Name="UserDataID" />
+          </Key>
+          <Property Name="UserDataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GivenName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PersonalNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlaceOfResidence" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="char" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CompanyManagement.dbo.vwAdministrators' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwAdministrators">
+          <Key>
+            <PropertyRef Name="Administrator Name" />
+            <PropertyRef Name="PersonalNo" />
+            <PropertyRef Name="UserDataID" />
+            <PropertyRef Name="AdministratorID" />
+            <PropertyRef Name="ExpirationAccountDate" />
+          </Key>
+          <Property Name="Administrator Name" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="PersonalNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlaceOfResidence" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserDataID" Type="int" Nullable="false" />
+          <Property Name="AdministratorID" Type="int" Nullable="false" />
+          <Property Name="ExpirationAccountDate" Type="datetime" Nullable="false" />
+          <Property Name="AdministratorTeam" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CompanyManagement.dbo.vwEmployees' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwEmployees">
+          <Key>
+            <PropertyRef Name="Administrator Name" />
+            <PropertyRef Name="PersonalNo" />
+            <PropertyRef Name="UserDataID" />
+            <PropertyRef Name="Sector" />
+          </Key>
+          <Property Name="Administrator Name" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="PersonalNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlaceOfResidence" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserDataID" Type="int" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Sector" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfessionalQualificationsLevel" Type="nvarchar" MaxLength="50" />
+          <Property Name="YearsOfService" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwManagers">
+          <Key>
+            <PropertyRef Name="Administrator Name" />
+            <PropertyRef Name="PersonalNo" />
+            <PropertyRef Name="UserDataID" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="OfficeNumber" />
+            <PropertyRef Name="ProjectsCount" />
+          </Key>
+          <Property Name="Administrator Name" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="PersonalNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlaceOfResidence" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserDataID" Type="int" Nullable="false" />
+          <Property Name="LevelOfResponsibility" Type="int" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OfficeNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProjectsCount" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblAdmini__UserD__164452B1">
+          <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
+          <End Role="tblAdministrators" Type="Self.tblAdministrators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserData">
+              <PropertyRef Name="UserDataID" />
+            </Principal>
+            <Dependent Role="tblAdministrators">
+              <PropertyRef Name="UserDataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__UserD__108B795B">
+          <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserData">
+              <PropertyRef Name="UserDataID" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="UserDataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__UserD__1367E606">
+          <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
+          <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserData">
+              <PropertyRef Name="UserDataID" />
+            </Principal>
+            <Dependent Role="tblManagers">
+              <PropertyRef Name="UserDataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompanyManagementModelStoreContainer">
+          <EntitySet Name="tblAdministrators" EntityType="Self.tblAdministrators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblManagers" EntityType="Self.tblManagers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserData" EntityType="Self.tblUserData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwAdministrators" EntityType="Self.vwAdministrators" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwAdministrators].[Administrator Name] AS [Administrator Name], 
+    [vwAdministrators].[PersonalNo] AS [PersonalNo], 
+    [vwAdministrators].[Sex] AS [Sex], 
+    [vwAdministrators].[PlaceOfResidence] AS [PlaceOfResidence], 
+    [vwAdministrators].[MaritalStatus] AS [MaritalStatus], 
+    [vwAdministrators].[UserDataID] AS [UserDataID], 
+    [vwAdministrators].[AdministratorID] AS [AdministratorID], 
+    [vwAdministrators].[ExpirationAccountDate] AS [ExpirationAccountDate], 
+    [vwAdministrators].[AdministratorTeam] AS [AdministratorTeam]
+    FROM [dbo].[vwAdministrators] AS [vwAdministrators]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwEmployees" EntityType="Self.vwEmployees" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwEmployees].[Administrator Name] AS [Administrator Name], 
+    [vwEmployees].[PersonalNo] AS [PersonalNo], 
+    [vwEmployees].[Sex] AS [Sex], 
+    [vwEmployees].[PlaceOfResidence] AS [PlaceOfResidence], 
+    [vwEmployees].[MaritalStatus] AS [MaritalStatus], 
+    [vwEmployees].[UserDataID] AS [UserDataID], 
+    [vwEmployees].[Position] AS [Position], 
+    [vwEmployees].[Salary] AS [Salary], 
+    [vwEmployees].[Sector] AS [Sector], 
+    [vwEmployees].[ProfessionalQualificationsLevel] AS [ProfessionalQualificationsLevel], 
+    [vwEmployees].[YearsOfService] AS [YearsOfService]
+    FROM [dbo].[vwEmployees] AS [vwEmployees]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwManagers" EntityType="Self.vwManagers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwManagers].[Administrator Name] AS [Administrator Name], 
+    [vwManagers].[PersonalNo] AS [PersonalNo], 
+    [vwManagers].[Sex] AS [Sex], 
+    [vwManagers].[PlaceOfResidence] AS [PlaceOfResidence], 
+    [vwManagers].[MaritalStatus] AS [MaritalStatus], 
+    [vwManagers].[UserDataID] AS [UserDataID], 
+    [vwManagers].[LevelOfResponsibility] AS [LevelOfResponsibility], 
+    [vwManagers].[Salary] AS [Salary], 
+    [vwManagers].[Email] AS [Email], 
+    [vwManagers].[OfficeNumber] AS [OfficeNumber], 
+    [vwManagers].[ProjectsCount] AS [ProjectsCount]
+    FROM [dbo].[vwManagers] AS [vwManagers]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tblAdmini__UserD__164452B1" Association="Self.FK__tblAdmini__UserD__164452B1">
+            <End Role="tblUserData" EntitySet="tblUserData" />
+            <End Role="tblAdministrators" EntitySet="tblAdministrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__UserD__108B795B" Association="Self.FK__tblEmploy__UserD__108B795B">
+            <End Role="tblUserData" EntitySet="tblUserData" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__UserD__1367E606" Association="Self.FK__tblManage__UserD__1367E606">
+            <End Role="tblUserData" EntitySet="tblUserData" />
+            <End Role="tblManagers" EntitySet="tblManagers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CompanyManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAdministrator">
+          <Key>
+            <PropertyRef Name="AdministratorID" />
+          </Key>
+          <Property Name="AdministratorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserDataID" Type="Int32" Nullable="false" />
+          <Property Name="ExpirationAccountDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AdministratorTeam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblUserData" Relationship="Self.FK__tblAdmini__UserD__164452B1" FromRole="tblAdministrators" ToRole="tblUserData" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserDataID" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sector" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfessionalQualificationsLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearsOfService" Type="Int32" />
+          <NavigationProperty Name="tblUserData" Relationship="Self.FK__tblEmploy__UserD__108B795B" FromRole="tblEmployees" ToRole="tblUserData" />
+        </EntityType>
+        <EntityType Name="tblManager">
+          <Key>
+            <PropertyRef Name="ManagerID" />
+          </Key>
+          <Property Name="ManagerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserDataID" Type="Int32" Nullable="false" />
+          <Property Name="LevelOfResponsibility" Type="Int32" />
+          <Property Name="PasswordHint" Type="String" MaxLength="1000" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfficeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProjectsCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="tblUserData" Relationship="Self.FK__tblManage__UserD__1367E606" FromRole="tblManagers" ToRole="tblUserData" />
+        </EntityType>
+        <EntityType Name="tblUserData">
+          <Key>
+            <PropertyRef Name="UserDataID" />
+          </Key>
+          <Property Name="UserDataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GivenName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonalNo" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceOfResidence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="1000" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblAdministrators" Relationship="Self.FK__tblAdmini__UserD__164452B1" FromRole="tblUserData" ToRole="tblAdministrators" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__UserD__108B795B" FromRole="tblUserData" ToRole="tblEmployees" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__UserD__1367E606" FromRole="tblUserData" ToRole="tblManagers" />
+        </EntityType>
+        <EntityType Name="vwAdministrator">
+          <Key>
+            <PropertyRef Name="Administrator_Name" />
+            <PropertyRef Name="PersonalNo" />
+            <PropertyRef Name="UserDataID" />
+            <PropertyRef Name="AdministratorID" />
+            <PropertyRef Name="ExpirationAccountDate" />
+          </Key>
+          <Property Name="Administrator_Name" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonalNo" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceOfResidence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserDataID" Type="Int32" Nullable="false" />
+          <Property Name="AdministratorID" Type="Int32" Nullable="false" />
+          <Property Name="ExpirationAccountDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AdministratorTeam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwEmployee">
+          <Key>
+            <PropertyRef Name="Administrator_Name" />
+            <PropertyRef Name="PersonalNo" />
+            <PropertyRef Name="UserDataID" />
+            <PropertyRef Name="Sector" />
+          </Key>
+          <Property Name="Administrator_Name" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonalNo" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceOfResidence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserDataID" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Sector" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfessionalQualificationsLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearsOfService" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vwManager">
+          <Key>
+            <PropertyRef Name="Administrator_Name" />
+            <PropertyRef Name="PersonalNo" />
+            <PropertyRef Name="UserDataID" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="OfficeNumber" />
+            <PropertyRef Name="ProjectsCount" />
+          </Key>
+          <Property Name="Administrator_Name" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonalNo" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceOfResidence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserDataID" Type="Int32" Nullable="false" />
+          <Property Name="LevelOfResponsibility" Type="Int32" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfficeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProjectsCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblAdmini__UserD__164452B1">
+          <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
+          <End Role="tblAdministrators" Type="Self.tblAdministrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserData">
+              <PropertyRef Name="UserDataID" />
+            </Principal>
+            <Dependent Role="tblAdministrators">
+              <PropertyRef Name="UserDataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__UserD__108B795B">
+          <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
+          <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserData">
+              <PropertyRef Name="UserDataID" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="UserDataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__UserD__1367E606">
+          <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
+          <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserData">
+              <PropertyRef Name="UserDataID" />
+            </Principal>
+            <Dependent Role="tblManagers">
+              <PropertyRef Name="UserDataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompanyManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAdministrators" EntityType="Self.tblAdministrator" />
+          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+          <EntitySet Name="tblManagers" EntityType="Self.tblManager" />
+          <EntitySet Name="tblUserDatas" EntityType="Self.tblUserData" />
+          <EntitySet Name="vwAdministrators" EntityType="Self.vwAdministrator" />
+          <EntitySet Name="vwEmployees" EntityType="Self.vwEmployee" />
+          <EntitySet Name="vwManagers" EntityType="Self.vwManager" />
+          <AssociationSet Name="FK__tblAdmini__UserD__164452B1" Association="Self.FK__tblAdmini__UserD__164452B1">
+            <End Role="tblUserData" EntitySet="tblUserDatas" />
+            <End Role="tblAdministrators" EntitySet="tblAdministrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__UserD__108B795B" Association="Self.FK__tblEmploy__UserD__108B795B">
+            <End Role="tblUserData" EntitySet="tblUserDatas" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__UserD__1367E606" Association="Self.FK__tblManage__UserD__1367E606">
+            <End Role="tblUserData" EntitySet="tblUserDatas" />
+            <End Role="tblManagers" EntitySet="tblManagers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CompanyManagementModelStoreContainer" CdmEntityContainer="CompanyManagementEntities">
+          <EntitySetMapping Name="tblAdministrators">
+            <EntityTypeMapping TypeName="CompanyManagementModel.tblAdministrator">
+              <MappingFragment StoreEntitySet="tblAdministrators">
+                <ScalarProperty Name="AdministratorID" ColumnName="AdministratorID" />
+                <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
+                <ScalarProperty Name="ExpirationAccountDate" ColumnName="ExpirationAccountDate" />
+                <ScalarProperty Name="AdministratorTeam" ColumnName="AdministratorTeam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmployees">
+            <EntityTypeMapping TypeName="CompanyManagementModel.tblEmployee">
+              <MappingFragment StoreEntitySet="tblEmployees">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="ProfessionalQualificationsLevel" ColumnName="ProfessionalQualificationsLevel" />
+                <ScalarProperty Name="YearsOfService" ColumnName="YearsOfService" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblManagers">
+            <EntityTypeMapping TypeName="CompanyManagementModel.tblManager">
+              <MappingFragment StoreEntitySet="tblManagers">
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
+                <ScalarProperty Name="LevelOfResponsibility" ColumnName="LevelOfResponsibility" />
+                <ScalarProperty Name="PasswordHint" ColumnName="PasswordHint" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="OfficeNumber" ColumnName="OfficeNumber" />
+                <ScalarProperty Name="ProjectsCount" ColumnName="ProjectsCount" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserDatas">
+            <EntityTypeMapping TypeName="CompanyManagementModel.tblUserData">
+              <MappingFragment StoreEntitySet="tblUserData">
+                <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
+                <ScalarProperty Name="GivenName" ColumnName="GivenName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="PersonalNo" ColumnName="PersonalNo" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="PlaceOfResidence" ColumnName="PlaceOfResidence" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwAdministrators">
+            <EntityTypeMapping TypeName="CompanyManagementModel.vwAdministrator">
+              <MappingFragment StoreEntitySet="vwAdministrators">
+                <ScalarProperty Name="Administrator_Name" ColumnName="Administrator Name" />
+                <ScalarProperty Name="PersonalNo" ColumnName="PersonalNo" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="PlaceOfResidence" ColumnName="PlaceOfResidence" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
+                <ScalarProperty Name="AdministratorID" ColumnName="AdministratorID" />
+                <ScalarProperty Name="ExpirationAccountDate" ColumnName="ExpirationAccountDate" />
+                <ScalarProperty Name="AdministratorTeam" ColumnName="AdministratorTeam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwEmployees">
+            <EntityTypeMapping TypeName="CompanyManagementModel.vwEmployee">
+              <MappingFragment StoreEntitySet="vwEmployees">
+                <ScalarProperty Name="Administrator_Name" ColumnName="Administrator Name" />
+                <ScalarProperty Name="PersonalNo" ColumnName="PersonalNo" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="PlaceOfResidence" ColumnName="PlaceOfResidence" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="ProfessionalQualificationsLevel" ColumnName="ProfessionalQualificationsLevel" />
+                <ScalarProperty Name="YearsOfService" ColumnName="YearsOfService" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwManagers">
+            <EntityTypeMapping TypeName="CompanyManagementModel.vwManager">
+              <MappingFragment StoreEntitySet="vwManagers">
+                <ScalarProperty Name="Administrator_Name" ColumnName="Administrator Name" />
+                <ScalarProperty Name="PersonalNo" ColumnName="PersonalNo" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="PlaceOfResidence" ColumnName="PlaceOfResidence" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
+                <ScalarProperty Name="LevelOfResponsibility" ColumnName="LevelOfResponsibility" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="OfficeNumber" ColumnName="OfficeNumber" />
+                <ScalarProperty Name="ProjectsCount" ColumnName="ProjectsCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2f36b9776b6e453887628cf139a77cf4" Name="Diagram1">
+        <EntityTypeShape EntityType="CompanyManagementModel.tblAdministrator" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.tblEmployee" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.tblManager" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.tblUserData" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.vwAdministrator" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.vwEmployee" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyManagementModel.vwManager" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CompanyManagementModel.FK__tblAdmini__UserD__164452B1" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyManagementModel.FK__tblEmploy__UserD__108B795B" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyManagementModel.FK__tblManage__UserD__1367E606" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
