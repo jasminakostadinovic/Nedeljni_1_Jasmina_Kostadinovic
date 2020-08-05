@@ -1,6 +1,7 @@
 ﻿using Company_app.Command;
 using Company_app.Model;
 using Company_app.View.Master;
+using Company_app.View.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace Company_app.ViewModel
 			}
 		}
 		#endregion
-
+		//login
 		private ICommand submitCommand;
 		public ICommand SubmitCommand
 		{
@@ -102,6 +103,29 @@ namespace Company_app.ViewModel
 			//	warning.Show("User name or password are not correct!");
 			//	return;
 			//}
+		}
+
+		//registrate
+		private ICommand registrateCommand;
+		public ICommand RegistrateCommand
+		{
+			get
+			{
+				if (registrateCommand == null)
+				{
+					registrateCommand = new RelayCommand(Registrate);
+					return registrateCommand;
+				}
+				return registrateCommand;
+			}
+		}
+
+		private void Registrate(object obj)
+		{
+			RegistrateView registrateView = new RegistrateView();
+			loginView.Close();
+			registrateView.Show();
+			return;
 		}
 	}
 }

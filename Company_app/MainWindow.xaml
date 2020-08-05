@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               mc:Ignorable="d"
-               Title="Login" Height="320" Width="300" FontSize="14" Background="#2e3137" WindowStartupLocation="CenterScreen">
+               Title="Login" Height="370" Width="300" FontSize="14" Background="#2e3137" WindowStartupLocation="CenterScreen">
     <Validation.ErrorTemplate>
         <ControlTemplate>
             <StackPanel>
@@ -21,7 +21,8 @@
             <TextBox Text="{Binding UserName, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" Background="#545d6a" Foreground="White" FontSize="12" Margin="0 10"/>
             <Label Content="Password" Foreground="White" Margin="0 10"/>
             <PasswordBox Name="passwordBox" Background="#545d6a" Foreground="White" FontSize="12" Margin="0 -10"/>
-            <Button Command="{Binding SubmitCommand}" Width="80" CommandParameter="{Binding ElementName=passwordBox}" Content="Submit" Margin="60 25" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Button Command="{Binding SubmitCommand}" Width="100" CommandParameter="{Binding ElementName=passwordBox}" Content="Submit" Margin="60 25" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Button Command="{Binding RegistrateCommand}" Width="100" CommandParameter="{Binding ElementName=passwordBox}" Content="Registrate" Margin="10 0" Background="#545d6a" Foreground="White" FontSize="18"/>
         </StackPanel>
     </Border>
 </Window>

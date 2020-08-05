@@ -3,10 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Company_app.View.Master"
         mc:Ignorable="d"
-        Title="MasterView" Height="450" Width="800">
+      Title="Administrators" Background="#2e3137" Height="500" Width="850" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Column="1" Grid.Row="3" Name="EmployeesGrid" AutoGenerateColumns="True" HorizontalAlignment="Center" 
+                  IsReadOnly="True" Height="400" VerticalAlignment="Top" 
+                  Width="790" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"
+                  ItemsSource="{Binding Employees}" SelectedItem="{Binding Employee}" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn  Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="btnDelete" Content="Delete"  HorizontalAlignment="Right"
+                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                                              Path=DataContext.DeleteAdministrator}"
+                            CommandParameter="{Binding}"/>
+                                <Button Name="btnUpdate" Content="Update"  HorizontalAlignment="Left"
+                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                                              Path=DataContext.UpdateAdministrator}"
+                            CommandParameter="{Binding}"/>
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Column="1" Grid.Row="1" Content="Add New Administrator" Name="btnAddNewAdministrator" HorizontalAlignment="Right" 
+                VerticalAlignment="Top" Width="auto"  
+                Command="{Binding AddNewAdministrator, UpdateSourceTrigger=PropertyChanged}"
+                Background="#545d6a" Foreground="White"/>
+       
+        <Button Grid.Column="1" Grid.Row="1" Content="Logout" Name="btnLogout" HorizontalAlignment="Center" 
+                VerticalAlignment="Top" Width="auto"  
+                Command="{Binding Logout, UpdateSourceTrigger=PropertyChanged}"
+                Background="#545d6a" Foreground="White"/>
     </Grid>
 </Window>
