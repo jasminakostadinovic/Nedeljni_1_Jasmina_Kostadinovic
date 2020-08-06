@@ -6,12 +6,12 @@ namespace Company_app.View.User
     /// <summary>
     /// Interaction logic for RegistrateView.xaml
     /// </summary>
-    public partial class RegistrateView : Window
+    public partial class RegistrationView : Window
     {
-        public RegistrateView()
+        public RegistrationView()
         {
             InitializeComponent();
-            this.DataContext = new RegistrateViewModel(this);
+            this.DataContext = new RegistrationViewModel(this);
         }
     }
 }

@@ -63,6 +63,24 @@ namespace CompanyData.Repositories
             }
         }
 
+        public int GetUserDataId(string userName)
+        {
+            try
+            {
+                using (var conn = new CompanyManagementEntities())
+                {
+                    var user = conn.tblUserDatas.FirstOrDefault(x => x.Username == userName);
+                    if (user != null)
+                        return user.UserDataID;
+                    return 0;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public List<vwEmployee> LoadEmployees()
         {
             try

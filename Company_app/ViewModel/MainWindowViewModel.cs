@@ -1,7 +1,11 @@
 ﻿using Company_app.Command;
 using Company_app.Model;
+using Company_app.View;
 using Company_app.View.Master;
 using Company_app.View.User;
+using CompanyData.Models;
+using CompanyData.Repositories;
+using CompanyData.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +65,7 @@ namespace Company_app.ViewModel
 			string password = (obj as PasswordBox).Password;
 			var validate = new Validations.Validations();
 			var constants = new Constants();
+			var validateCompanyData = new CompanyValidations();
 			if (UserName == Constants.usernamedMaster && SecurePasswordHasher.Verify(password, constants.passwordEmployeeHashed))
 			{
 				MasterView masterView = new MasterView();
@@ -69,40 +74,33 @@ namespace Company_app.ViewModel
 				return;
 			}
 
-			//else if (validate.IsValidPersonalNoFormat(UserName) && SecurePasswordHasher.Verify(password, constants.passwordGuestHashed))
-			//{
-
-			//	DataAccess dataAccess = new DataAccess();
-			//	if (validate.IsPersonalNoInDb(UserName, dataAccess.LoadPersonalNumbers()))
-			//	{
-			//		OrderStatusView oldQuestView = new OrderStatusView(UserName);
-
-			//		//loginView.Close();
-			//		oldQuestView.Show();
-			//		var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
-			//		timer.Start();
-			//		timer.Tick += (sender, args) =>
-			//		{
-			//			timer.Stop();
-			//			NewGuestView guestView = new NewGuestView(UserName);
-			//			loginView.Close();
-			//			oldQuestView.Close();
-			//			guestView.Show();
-			//		};
-
-			//		return;
-			//	}
-			//	NewGuestView newGuestView = new NewGuestView(UserName);
-			//	loginView.Close();
-			//	newGuestView.Show();
-			//	return;
-			//}
-			//else
-			//{
-			//	WarningView warning = new WarningView(loginView);
-			//	warning.Show("User name or password are not correct!");
-			//	return;
-			//}
+			else if (validateCompanyData.IsCorrectUser(userName, password))
+			{
+				var db = new CompanyDBRepository();
+				int userDataId = db.GetUserDataId(userName);
+				if (userDataId != 0)
+				{
+					if (validateCompanyData.GetUserType(userDataId) == nameof(tblManager))
+					{
+						return;
+					}
+					if (validateCompanyData.GetUserType(userDataId) == nameof(tblAdministrator))
+					{
+						return;
+					}
+					if (validateCompanyData.GetUserType(userDataId) == nameof(tblEmployee))
+					{
+						return;
+					}
+				}
+					
+			}
+			else
+			{
+				WarningView warning = new WarningView(loginView);
+				warning.Show("User name or password are not correct!");
+				return;
+			}
 		}
 
 		//registrate
@@ -122,7 +120,7 @@ namespace Company_app.ViewModel
 
 		private void Registrate(object obj)
 		{
-			RegistrateView registrateView = new RegistrateView();
+			RegistrationView registrateView = new RegistrationView();
 			loginView.Close();
 			registrateView.Show();
 			return;

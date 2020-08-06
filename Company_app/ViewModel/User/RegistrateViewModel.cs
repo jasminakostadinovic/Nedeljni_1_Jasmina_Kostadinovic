@@ -2,14 +2,14 @@
 
 namespace Company_app.ViewModel.User
 {
-	class RegistrateViewModel : ViewModelBase
+	class RegistrationViewModel : ViewModelBase
     {
 		#region Fields
-		readonly RegistrateView view;
+		readonly RegistrationView view;
 		#endregion
 
 		#region Constructor
-		internal RegistrateViewModel(RegistrateView view)
+		internal RegistrationViewModel(RegistrationView view)
 		{
 			this.view = view;
 		}
