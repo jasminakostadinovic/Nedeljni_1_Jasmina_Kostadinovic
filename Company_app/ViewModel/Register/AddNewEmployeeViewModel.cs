@@ -39,8 +39,7 @@ namespace Company_app.ViewModel.User
         private List<tblSector> sectors;
         private string professionalQualificationsLevel;
         private string yearsOfService;
-        private string[] positions = new string[] {"cleaning",
-"cooking", "monitoring", "reporting" };
+        private string[] positions = new string[] {""};
         private string[] professionalQualificationsLevels = new string[] { "I", "II", "III", "IV", "V", "VI", "VII" };
         private int yearsOfServiceValue;
         #endregion
