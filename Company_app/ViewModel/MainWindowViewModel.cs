@@ -9,6 +9,7 @@ using CompanyData.Validations;
 using System.Windows.Controls;
 using System.Windows.Input;
 using DataValidations;
+using Company_app.View.Administrator;
 
 namespace Company_app.ViewModel
 {
@@ -75,20 +76,25 @@ namespace Company_app.ViewModel
 				int userDataId = db.GetUserDataId(userName);
 				if (userDataId != 0)
 				{
-					if (validateCompanyData.GetUserType(userDataId) == nameof(tblManager))
+					var typeOfUser = validateCompanyData.GetUserType(userDataId);
+					if (typeOfUser == nameof(tblManager))
+					{					
+						return;
+					}
+					if (typeOfUser == nameof(tblAdministrator))
+					{
+						var typeOfAdministrator = validateCompanyData.GetAdministratorType(userDataId);
+
+						AdministratorView administrator = new AdministratorView(typeOfAdministrator);
+						administrator.Show();
+						loginView.Close();
+						return;
+					}
+					if (typeOfUser == nameof(tblEmployee))
 					{
 						return;
 					}
-					if (validateCompanyData.GetUserType(userDataId) == nameof(tblAdministrator))
-					{
-						return;
-					}
-					if (validateCompanyData.GetUserType(userDataId) == nameof(tblEmployee))
-					{
-						return;
-					}
-				}
-					
+				}					
 			}
 			else
 			{

@@ -70,6 +70,36 @@ namespace CompanyData.Validations
             }
         }
 
+        public bool IsUniqueSectorName(string name)
+        {
+            try
+            {
+                using (var conn = new CompanyManagementEntities())
+                {
+                    return !conn.tblSectors.Any(x => x.SectorName == name);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public string GetAdministratorType(int userDataId)
+        {
+            try
+            {
+                using (var conn = new CompanyManagementEntities())
+                {
+                    return conn.tblAdministrators.First(x => x.UserDataID == userDataId).AdministratorTeam;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public string GetUserType(int userDataId)
         {
             try

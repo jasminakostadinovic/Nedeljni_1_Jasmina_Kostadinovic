@@ -405,6 +405,7 @@ namespace Company_app.ViewModel.User
                     else
                     {
                         Logger.Instance.LogCRUD($"[{DateTime.Now.ToString("dd.MM.yyyy hh: mm")}] Created new manager with Personal Number : '{PersonalNo}'");
+                        MessageBox.Show("You have successfully created new manager account.");
                     }
                     var login = new MainWindow();
                     login.Show();

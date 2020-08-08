@@ -67,17 +67,29 @@
     </ApplicationDefinition>
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\Logger.cs" />
+    <Compile Include="ViewModel\Administrator\AddNewSectorViewModel.cs" />
+    <Compile Include="ViewModel\Administrator\AdministratorViewModel.cs" />
+    <Compile Include="ViewModel\Administrator\DeleteSectorViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Master\AddNewAdministratorViewModel.cs" />
     <Compile Include="ViewModel\Master\MasterViewModel.cs" />
     <Compile Include="ViewModel\Master\UpdateExpirationAccountDateViewModel.cs" />
-    <Compile Include="ViewModel\User\AddNewEmployeeViewModel.cs" />
-    <Compile Include="ViewModel\User\AddNewManagerEvaluationViewModel.cs" />
-    <Compile Include="ViewModel\User\AddNewManagerViewModel.cs" />
-    <Compile Include="ViewModel\User\ConfirmOperationViewModel.cs" />
-    <Compile Include="ViewModel\User\RegistrateViewModel.cs" />
+    <Compile Include="ViewModel\Register\AddNewEmployeeViewModel.cs" />
+    <Compile Include="ViewModel\Register\AddNewManagerEvaluationViewModel.cs" />
+    <Compile Include="ViewModel\Register\AddNewManagerViewModel.cs" />
+    <Compile Include="ViewModel\Register\ConfirmOperationViewModel.cs" />
+    <Compile Include="ViewModel\Register\RegistrateViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WarningViewModel.cs" />
+    <Compile Include="View\Administrator\AddNewSectorView.xaml.cs">
+      <DependentUpon>AddNewSectorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Administrator\AdministratorView.xaml.cs">
+      <DependentUpon>AdministratorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Administrator\DeleteSectorView.xaml.cs">
+      <DependentUpon>DeleteSectorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Master\AddNewAdministratorView.xaml.cs">
       <DependentUpon>AddNewAdministratorView.xaml</DependentUpon>
     </Compile>
@@ -87,19 +99,19 @@
     <Compile Include="View\Master\UpdateExpirationAccountDateView.xaml.cs">
       <DependentUpon>UpdateExpirationAccountDateView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\User\AddNewEmployeeView.xaml.cs">
+    <Compile Include="View\Register\AddNewEmployeeView.xaml.cs">
       <DependentUpon>AddNewEmployeeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\User\AddNewManagerEvaluationView.xaml.cs">
+    <Compile Include="View\Register\AddNewManagerEvaluationView.xaml.cs">
       <DependentUpon>AddNewManagerEvaluationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\User\AddNewManagerView.xaml.cs">
+    <Compile Include="View\Register\AddNewManagerView.xaml.cs">
       <DependentUpon>AddNewManagerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\User\ConfirmOperationView.xaml.cs">
+    <Compile Include="View\Register\ConfirmOperationView.xaml.cs">
       <DependentUpon>ConfirmOperationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\User\RegistrationView.xaml.cs">
+    <Compile Include="View\Register\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WarningView.xaml.cs">
@@ -118,6 +130,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Administrator\AddNewSectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Administrator\AdministratorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Administrator\DeleteSectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Master\AddNewAdministratorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,23 +154,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\User\AddNewEmployeeView.xaml">
+    <Page Include="View\Register\AddNewEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\User\AddNewManagerEvaluationView.xaml">
+    <Page Include="View\Register\AddNewManagerEvaluationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\User\AddNewManagerView.xaml">
+    <Page Include="View\Register\AddNewManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\User\ConfirmOperationView.xaml">
+    <Page Include="View\Register\ConfirmOperationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\User\RegistrationView.xaml">
+    <Page Include="View\Register\RegistrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

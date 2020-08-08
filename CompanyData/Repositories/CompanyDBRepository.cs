@@ -119,6 +119,80 @@ namespace CompanyData.Repositories
             }
         }
 
+        public bool TryAddNewSector(tblSector sector)
+        {
+            try
+            {
+                using (var conn = new CompanyManagementEntities())
+                {
+                    conn.tblSectors.Add(sector);
+                    conn.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool TryDeleteSector(int sectorID)
+        {
+            try
+            {
+                using (var conn = new CompanyManagementEntities())
+                {
+                    var sectorToRemove = conn.tblSectors.FirstOrDefault(x => x.SectorID == sectorID);
+
+                    if (sectorToRemove != null)
+                    {
+                        if(conn.tblEmployees.Any(x => x.SectorID == sectorID))
+                        {
+                            var employees = conn.tblEmployees.Where(x => x.SectorID == sectorID);
+                            int id = GetIdofDefaultSector();
+                            foreach (var item in employees)
+                            {
+                                if (id != 0)
+                                {
+                                    item.SectorID = id;
+                                }
+                                else
+                                    return false;                              
+                            }
+                            conn.tblSectors.Remove(sectorToRemove);
+                            conn.SaveChanges();
+                            return true;
+                        }                  
+                    }
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private int GetIdofDefaultSector()
+        {
+            try
+            {
+                using (var conn = new CompanyManagementEntities())
+                {
+                    var sector = conn.tblSectors.FirstOrDefault(x => x.SectorName == "Default");
+                    if (sector != null)
+                        return sector.SectorID;
+                    conn.tblSectors.Add(new tblSector() { SectorName = "Default" });
+                    conn.SaveChanges();
+                    return 1;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public List<vwManager> LoadManagers()
         {
             try
@@ -265,10 +339,17 @@ namespace CompanyData.Repositories
                     var sectors = new List<tblSector>();
                     if (conn.tblSectors.Any())
                     {
-                        foreach (var item in conn.tblSectors)
+                        if (conn.tblSectors.Any(x => x.SectorName != "Default"))
                         {
-                            sectors.Add(item);
+                            foreach (var item in conn.tblSectors)
+                            {
+                                sectors.Add(item);
+                            }
                         }
+                    }
+                    else
+                    {
+                        conn.tblSectors.Add(new tblSector() { SectorName = "Default" });
                     }
                     return sectors;
                 }

@@ -33,6 +33,7 @@ namespace Company_app.ViewModel.User
         private tblUserData userData;
         private readonly CompanyDBRepository db = new CompanyDBRepository();
 
+        private string sectorName;
         private string position;
         private tblSector sector;
         private List<tblSector> sectors;
@@ -44,6 +45,19 @@ namespace Company_app.ViewModel.User
         private int yearsOfServiceValue;
         #endregion
         #region Properties
+        public string SectorName 
+        {
+            get
+            {
+                return sectorName;
+            }
+            set
+            {
+                if (sectorName == value) return;
+                sectorName = value;
+                OnPropertyChanged(nameof(SectorName));
+            }
+        }
         public bool IsAddedNewEmployee { get; internal set; }
         public bool CanSave { get; set; }
 
@@ -307,6 +321,7 @@ namespace Company_app.ViewModel.User
             sectors = LoadSectors();
             professionalQualificationsLevel = string.Empty;
             yearsOfService = string.Empty;
+            sectorName = Sector.SectorName;
         }
 
         private List<tblSector> LoadSectors()
@@ -451,6 +466,7 @@ namespace Company_app.ViewModel.User
                             else
                             {
                                 Logger.Instance.LogCRUD($"[{DateTime.Now.ToString("dd.MM.yyyy hh: mm")}] Created new employee with Personal Number : '{PersonalNo}'");
+                                MessageBox.Show("You have successfully created new employee account.");
                             }
                         }
                         else
