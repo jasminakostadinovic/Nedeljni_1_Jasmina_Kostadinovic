@@ -3,10 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Company_app.View.User"
-        mc:Ignorable="d"
-        Title="RegistrateView" Height="450" Width="800">
+            mc:Ignorable="d"
+      Title="Registration" Background="#2e3137" Height="250" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="85"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50
+                           "/>
+        </Grid.RowDefinitions>
+
+
+        <Button Grid.Column="1" Grid.Row="1" Content="Registrate as employee" Name="btnAddNewEmployee" HorizontalAlignment="Center" 
+                VerticalAlignment="Top" Width="120"  
+                Command="{Binding AddNewEmployee, UpdateSourceTrigger=PropertyChanged}"
+                Background="#545d6a" Foreground="White"/>
+        <Button Grid.Column="1" Grid.Row="3" Content="Registrate as manager" Name="btnOpenEmployeesRecords" HorizontalAlignment="Left" 
+                VerticalAlignment="Top" Width="120"  
+                Command="{Binding AddNewManager, UpdateSourceTrigger=PropertyChanged}"
+                Background="#545d6a" Foreground="White"/>
+        <Button Grid.Column="1" Grid.Row="5" Content="Back to login" Name="btnLogout" HorizontalAlignment="Center" 
+                VerticalAlignment="Top" Width="120"  
+                Command="{Binding Logout, UpdateSourceTrigger=PropertyChanged}"
+                Background="#545d6a" Foreground="White"/>
     </Grid>
 </Window>
