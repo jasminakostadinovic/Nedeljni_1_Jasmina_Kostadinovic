@@ -6,14 +6,9 @@ using Company_app.View.User;
 using CompanyData.Models;
 using CompanyData.Repositories;
 using CompanyData.Validations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Validations;
+using DataValidations;
 
 namespace Company_app.ViewModel
 {
@@ -63,7 +58,7 @@ namespace Company_app.ViewModel
 		void Submit(object obj)
 		{
 			string password = (obj as PasswordBox).Password;
-			var validate = new Validations.Validations();
+			var validate = new DataValidations.DataValidation();
 			var constants = new Constants();
 			var validateCompanyData = new CompanyValidations();
 			if (UserName == Constants.usernamedMaster && SecurePasswordHasher.Verify(password, constants.passwordEmployeeHashed))

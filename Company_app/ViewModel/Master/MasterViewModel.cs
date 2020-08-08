@@ -1,6 +1,10 @@
 ﻿using Company_app.Command;
 using Company_app.View.Master;
+using CompanyData.Models;
+using CompanyData.Repositories;
 using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Company_app.ViewModel.Master
@@ -9,118 +13,165 @@ namespace Company_app.ViewModel.Master
     {
         #region Fields
         private readonly MasterView hotelOwnerView;
+        private vwAdministrator administrator;
+        private tblAdministrator selectedAdministrator;
+        private List<vwAdministrator> administrators;
+        private readonly CompanyDBRepository companyDB = new CompanyDBRepository();
         #endregion
         #region Constructors
         public MasterViewModel(MasterView hotelOwnerView)
         {
             this.hotelOwnerView = hotelOwnerView;
+            Administrators = LoadAdministrators();
+            selectedAdministrator = new tblAdministrator();
+            administrator = new vwAdministrator();
         }
         #endregion
+        #region Properties            
 
-        //#region Commands
+        public vwAdministrator Administrator
+        {
+            get
+            {
+                return administrator;
+            }
+            set
+            {
+                administrator = value;
+                OnPropertyChanged(nameof(Administrator));
+            }
+        }
+        public List<vwAdministrator> Administrators
+        {
+            get
+            {
+                return administrators;
+            }
+            set
+            {
+                administrators = value;
+                OnPropertyChanged(nameof(Administrators));
+            }
+        }
 
-        ////adding new emloyee
+        #endregion
+        #region Methods
+        private List<vwAdministrator> LoadAdministrators()
+        {
+            return companyDB.LoadAdministrators();   
+        }
+        #endregion
+        #region Commands
 
-        //private ICommand addNewEmployee;
-        //public ICommand AddNewEmployee
-        //{
-        //    get
-        //    {
-        //        if (addNewEmployee == null)
-        //        {
-        //            addNewEmployee = new RelayCommand(param => AddNewEmployeeExecute(), param => CanAddNewEmployee());
-        //        }
-        //        return addNewEmployee;
-        //    }
-        //}
+        //adding new administrator
 
-        //private void AddNewEmployeeExecute()
-        //{
-        //    try
-        //    {
-        //        AddNewEmployeeView addNewEmployeeView = new AddNewEmployeeView();
-        //        addNewEmployeeView.ShowDialog();
+        private ICommand addNewAdministrator;
+        public ICommand AddNewAdministrator
+        {
+            get
+            {
+                if (addNewAdministrator == null)
+                {
+                    addNewAdministrator = new RelayCommand(param => AddNewAdministratorExecute(), param => CanAddNewAdministrator());
+                }
+                return addNewAdministrator;
+            }
+        }
 
-        //        if ((addNewEmployeeView.DataContext as AddNewEmployeeViewModel).IsAddedNewEmployee == true)
-        //        {
-        //            MessageBox.Show("New employee has been successfully created.");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //}
+        private void AddNewAdministratorExecute()
+        {
+            try
+            {
+                AddNewAdministratorView addNewAdministratorView = new AddNewAdministratorView();
+                addNewAdministratorView.ShowDialog();
 
-        //private bool CanAddNewEmployee()
-        //{
-        //    return true;
-        //}
+                if ((addNewAdministratorView.DataContext as AddNewAdministratorViewModel).IsAddedNewAdministrator == true)
+                {
+                    Administrators = LoadAdministrators();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
-        ////adding new manager
+        private bool CanAddNewAdministrator()
+        {
+            return true;
+        }
 
-        //private ICommand addNewManager;
-        //public ICommand AddNewManager
-        //{
-        //    get
-        //    {
-        //        if (addNewManager == null)
-        //        {
-        //            addNewManager = new RelayCommand(param => AddNewManagerExecute(), param => CanAddNewManager());
-        //        }
-        //        return addNewManager;
-        //    }
-        //}
+        //Update administrator ExpirationAccountDate
 
-        //private void AddNewManagerExecute()
-        //{
-        //    try
-        //    {
-        //        AddNewManagerView addNewManagerView = new AddNewManagerView();
-        //        addNewManagerView.ShowDialog();
+        private ICommand updateExpirationAccountDate;
+        public ICommand UpdateExpirationAccountDate
+        {
+            get
+            {
+                if (updateExpirationAccountDate == null)
+                {
+                    updateExpirationAccountDate = new RelayCommand(param => UpdateExpirationAccountDateExecute(), param => CanupdateExpirationAccountDate());
+                }
+                return updateExpirationAccountDate;
+            }
+        }
 
-        //        if ((addNewManagerView.DataContext as AddNewManagerViewModel).IsAddedNewManager == true)
-        //        {
-        //            MessageBox.Show("New manager has been successfully created.");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //}
+        private void UpdateExpirationAccountDateExecute()
+        {
+            try
+            {
+                if (Administrator != null)
+                {
+                    selectedAdministrator = companyDB.LoadAdministrator(administrator.AdministratorID);
+                    UpdateExpirationAccountDateView updateExpirationAccountDateView = new UpdateExpirationAccountDateView(selectedAdministrator);
+                    updateExpirationAccountDateView.ShowDialog();
 
-        //private bool CanAddNewManager()
-        //{
-        //    return true;
-        //}
+                    if ((updateExpirationAccountDateView.DataContext as UpdateExpirationAccountDateViewModel).IsDateUpdated == true)
+                    {
+                        Administrators = LoadAdministrators();
+                    }
+                }
+           
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
-        ////logging out
+        private bool CanupdateExpirationAccountDate()
+        {
+            if (Administrator == null)
+                return false;
+            return true;
+        }
 
-        //private ICommand logout;
-        //public ICommand Logout
-        //{
-        //    get
-        //    {
-        //        if (logout == null)
-        //        {
-        //            logout = new RelayCommand(param => ExitExecute(), param => CanExitExecute());
-        //        }
-        //        return logout;
-        //    }
-        //}
+        //logging out
 
-        //private bool CanExitExecute()
-        //{
-        //    return true;
-        //}
+        private ICommand logout;
+        public ICommand Logout
+        {
+            get
+            {
+                if (logout == null)
+                {
+                    logout = new RelayCommand(param => ExitExecute(), param => CanExitExecute());
+                }
+                return logout;
+            }
+        }
 
-        //private void ExitExecute()
-        //{
-        //    MainWindow loginWindow = new MainWindow();
-        //    hotelOwnerView.Close();
-        //    loginWindow.Show();
-        //}
-        //#endregion
+        private bool CanExitExecute()
+        {
+            return true;
+        }
+
+        private void ExitExecute()
+        {
+            MainWindow loginWindow = new MainWindow();
+            hotelOwnerView.Close();
+            loginWindow.Show();
+        }
+        #endregion
     }
 }

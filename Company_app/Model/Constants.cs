@@ -1,4 +1,4 @@
-﻿using Validations;
+﻿using DataValidations;
 
 namespace Company_app.Model
 {

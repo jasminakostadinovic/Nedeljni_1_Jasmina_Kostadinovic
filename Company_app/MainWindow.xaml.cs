@@ -1,4 +1,5 @@
-﻿using Company_app.ViewModel;
+﻿using Company_app.Model;
+using Company_app.ViewModel;
 using System.Windows;
 
 namespace Company_app
@@ -12,6 +13,7 @@ namespace Company_app
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel(this);
+            Logger.Instance.GetType();
         }
     }
 }

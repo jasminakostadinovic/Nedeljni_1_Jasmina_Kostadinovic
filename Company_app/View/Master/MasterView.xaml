@@ -26,14 +26,10 @@
                 <DataGridTemplateColumn  Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Name="btnDelete" Content="Delete"  HorizontalAlignment="Right"
-                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
-                                              Path=DataContext.DeleteAdministrator}"
-                            CommandParameter="{Binding}"/>
+                            <StackPanel Orientation="Horizontal">                             
                                 <Button Name="btnUpdate" Content="Update"  HorizontalAlignment="Left"
                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
-                                              Path=DataContext.UpdateAdministrator}"
+                                              Path=DataContext.UpdateExpirationAccountDate}"
                             CommandParameter="{Binding}"/>
                             </StackPanel>
 

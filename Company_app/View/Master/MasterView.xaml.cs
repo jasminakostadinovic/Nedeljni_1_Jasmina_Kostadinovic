@@ -17,7 +17,8 @@ namespace Company_app.View.Master
         private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             //hiding id columns
-            if (e.Column.Header.ToString() == "EmployeeID")
+            if (e.Column.Header.ToString() == "UserDataID" ||
+                e.Column.Header.ToString() == "AdministratorID")
             {
                 e.Column.Visibility = Visibility.Collapsed;
             }

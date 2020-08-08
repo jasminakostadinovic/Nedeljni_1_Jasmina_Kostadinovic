@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Validations
+namespace DataValidations
 {
-    public class Validations
+    public class DataValidation
     {
         public bool IsValidPersonalNoFormat(string personalNoToCheck)
         {
