@@ -159,7 +159,8 @@ SELECT
 					  dbo.tblManagers.Salary,
 					  dbo.tblManagers.Email ,
                       dbo.tblManagers.OfficeNumber,
-                      dbo.tblManagers.ProjectsCount
+                      dbo.tblManagers.ProjectsCount,
+                      dbo.tblManagers.ManagerID
 
 FROM                  dbo.tblManagers INNER JOIN
                       dbo.tblUserData ON dbo.tblManagers.UserDataID = dbo.tblUserData.UserDataID;
