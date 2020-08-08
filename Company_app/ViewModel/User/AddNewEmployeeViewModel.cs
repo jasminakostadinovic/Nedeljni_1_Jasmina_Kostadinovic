@@ -8,6 +8,7 @@ using DataValidations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -26,6 +27,7 @@ namespace Company_app.ViewModel.User
         private string sex;
         private string placeOfResidence;
         private string maritalStatus;
+        private Random random = new Random();
         private string[] sexTypes = new string[] { "M", "F", "N", "X" };
         private string[] maritalStatusTypes = new string[] { "single", "married", "divorced" };
         private tblUserData userData;
@@ -432,14 +434,32 @@ namespace Company_app.ViewModel.User
                     employee.UserDataID = userId;
                     employee.SectorID = sector.SectorID;
                     employee.ProfessionalQualificationsLevel = ProfessionalQualificationsLevel;
-
-                    IsAddedNewEmployee = db.TryAddNewEmployee(employee);
-                    if (IsAddedNewEmployee == false)
+                    var managers = db.LoadManagers();
+                    if(managers == null)
+                    {
                         MessageBox.Show("Something went wrong. New employee is not created.");
+                    }
                     else
                     {
-                        Logger.Instance.LogCRUD($"[{DateTime.Now.ToString("dd.MM.yyyy hh: mm")}] Created new employee with Personal Number : '{PersonalNo}'");
+                        if (managers.Any())
+                        {
+                            int index = random.Next(0, managers.Count);
+                            employee.ManagerID = managers[index].ManagerID;
+                            IsAddedNewEmployee = db.TryAddNewEmployee(employee);
+                            if (IsAddedNewEmployee == false)
+                                MessageBox.Show("Something went wrong. New employee is not created.");
+                            else
+                            {
+                                Logger.Instance.LogCRUD($"[{DateTime.Now.ToString("dd.MM.yyyy hh: mm")}] Created new employee with Personal Number : '{PersonalNo}'");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("You can not create the new employee account at the moment.");
+                        }
                     }
+
+                
                     var login = new MainWindow();
                     login.Show();
                     addNewEmployeeView.Close();

@@ -14,6 +14,12 @@ namespace CompanyData.Models
     
     public partial class tblManager
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblManager()
+        {
+            this.tblEmployees = new HashSet<tblEmployee>();
+        }
+    
         public int ManagerID { get; set; }
         public int UserDataID { get; set; }
         public Nullable<int> LevelOfResponsibility { get; set; }
@@ -23,6 +29,8 @@ namespace CompanyData.Models
         public string ProjectsCount { get; set; }
         public Nullable<decimal> Salary { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblEmployee> tblEmployees { get; set; }
         public virtual tblUserData tblUserData { get; set; }
     }
 }

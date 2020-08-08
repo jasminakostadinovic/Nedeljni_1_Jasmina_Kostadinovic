@@ -14,7 +14,7 @@ namespace CompanyData.Models
     
     public partial class vwEmployee
     {
-        public string Administrator_Name { get; set; }
+        public string Employee_Name { get; set; }
         public string PersonalNo { get; set; }
         public string Sex { get; set; }
         public string PlaceOfResidence { get; set; }
@@ -23,6 +23,7 @@ namespace CompanyData.Models
         public string Position { get; set; }
         public Nullable<decimal> Salary { get; set; }
         public int SectorID { get; set; }
+        public int ManagerID { get; set; }
         public string ProfessionalQualificationsLevel { get; set; }
         public Nullable<int> YearsOfService { get; set; }
         public string SectorName { get; set; }

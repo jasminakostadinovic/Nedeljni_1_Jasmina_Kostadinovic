@@ -14,7 +14,7 @@ namespace CompanyData.Models
     
     public partial class vwManager
     {
-        public string Administrator_Name { get; set; }
+        public string Manager_Name { get; set; }
         public string PersonalNo { get; set; }
         public string Sex { get; set; }
         public string PlaceOfResidence { get; set; }
@@ -25,5 +25,6 @@ namespace CompanyData.Models
         public string Email { get; set; }
         public string OfficeNumber { get; set; }
         public string ProjectsCount { get; set; }
+        public int ManagerID { get; set; }
     }
 }
