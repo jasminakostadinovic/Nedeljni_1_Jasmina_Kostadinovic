@@ -22,7 +22,7 @@
           <Property Name="UserDataID" Type="int" Nullable="false" />
           <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
-          <Property Name="Sector" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SectorID" Type="int" Nullable="false" />
           <Property Name="ProfessionalQualificationsLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="YearsOfService" Type="int" />
         </EntityType>
@@ -38,6 +38,14 @@
           <Property Name="OfficeNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProjectsCount" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="tblSector">
+          <Key>
+            <PropertyRef Name="SectorID" />
+          </Key>
+          <Property Name="SectorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tblUserData">
           <Key>
@@ -80,7 +88,8 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwEmployees' does not have a
             <PropertyRef Name="Administrator Name" />
             <PropertyRef Name="PersonalNo" />
             <PropertyRef Name="UserDataID" />
-            <PropertyRef Name="Sector" />
+            <PropertyRef Name="SectorID" />
+            <PropertyRef Name="SectorName" />
           </Key>
           <Property Name="Administrator Name" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="PersonalNo" Type="nvarchar" MaxLength="13" Nullable="false" />
@@ -90,9 +99,10 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwEmployees' does not have a
           <Property Name="UserDataID" Type="int" Nullable="false" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Sector" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SectorID" Type="int" Nullable="false" />
           <Property Name="ProfessionalQualificationsLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="YearsOfService" Type="int" />
+          <Property Name="SectorName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -117,7 +127,7 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
           <Property Name="OfficeNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProjectsCount" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblAdmini__UserD__164452B1">
+        <Association Name="FK__tblAdmini__UserD__4E88ABD4">
           <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
           <End Role="tblAdministrators" Type="Self.tblAdministrators" Multiplicity="*" />
           <ReferentialConstraint>
@@ -129,7 +139,19 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblEmploy__UserD__108B795B">
+        <Association Name="FK__tblEmploy__Secto__48CFD27E">
+          <End Role="tblSector" Type="Self.tblSector" Multiplicity="1" />
+          <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSector">
+              <PropertyRef Name="SectorID" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__UserD__47DBAE45">
           <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
           <End Role="tblEmployees" Type="Self.tblEmployees" Multiplicity="*" />
           <ReferentialConstraint>
@@ -141,7 +163,7 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblManage__UserD__1367E606">
+        <Association Name="FK__tblManage__UserD__4BAC3F29">
           <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
           <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -157,6 +179,7 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
           <EntitySet Name="tblAdministrators" EntityType="Self.tblAdministrators" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmployees" EntityType="Self.tblEmployees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblManagers" EntityType="Self.tblManagers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSector" EntityType="Self.tblSector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUserData" EntityType="Self.tblUserData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwAdministrators" EntityType="Self.vwAdministrators" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -181,9 +204,10 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
     [vwEmployees].[UserDataID] AS [UserDataID], 
     [vwEmployees].[Position] AS [Position], 
     [vwEmployees].[Salary] AS [Salary], 
-    [vwEmployees].[Sector] AS [Sector], 
+    [vwEmployees].[SectorID] AS [SectorID], 
     [vwEmployees].[ProfessionalQualificationsLevel] AS [ProfessionalQualificationsLevel], 
-    [vwEmployees].[YearsOfService] AS [YearsOfService]
+    [vwEmployees].[YearsOfService] AS [YearsOfService], 
+    [vwEmployees].[SectorName] AS [SectorName]
     FROM [dbo].[vwEmployees] AS [vwEmployees]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwManagers" EntityType="Self.vwManagers" store:Type="Views" store:Schema="dbo">
@@ -201,15 +225,19 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
     [vwManagers].[ProjectsCount] AS [ProjectsCount]
     FROM [dbo].[vwManagers] AS [vwManagers]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__tblAdmini__UserD__164452B1" Association="Self.FK__tblAdmini__UserD__164452B1">
+          <AssociationSet Name="FK__tblAdmini__UserD__4E88ABD4" Association="Self.FK__tblAdmini__UserD__4E88ABD4">
             <End Role="tblUserData" EntitySet="tblUserData" />
             <End Role="tblAdministrators" EntitySet="tblAdministrators" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblEmploy__UserD__108B795B" Association="Self.FK__tblEmploy__UserD__108B795B">
+          <AssociationSet Name="FK__tblEmploy__Secto__48CFD27E" Association="Self.FK__tblEmploy__Secto__48CFD27E">
+            <End Role="tblSector" EntitySet="tblSector" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__UserD__47DBAE45" Association="Self.FK__tblEmploy__UserD__47DBAE45">
             <End Role="tblUserData" EntitySet="tblUserData" />
             <End Role="tblEmployees" EntitySet="tblEmployees" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblManage__UserD__1367E606" Association="Self.FK__tblManage__UserD__1367E606">
+          <AssociationSet Name="FK__tblManage__UserD__4BAC3F29" Association="Self.FK__tblManage__UserD__4BAC3F29">
             <End Role="tblUserData" EntitySet="tblUserData" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
@@ -227,7 +255,7 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
           <Property Name="UserDataID" Type="Int32" Nullable="false" />
           <Property Name="ExpirationAccountDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AdministratorTeam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblUserData" Relationship="Self.FK__tblAdmini__UserD__164452B1" FromRole="tblAdministrators" ToRole="tblUserData" />
+          <NavigationProperty Name="tblUserData" Relationship="Self.FK__tblAdmini__UserD__4E88ABD4" FromRole="tblAdministrators" ToRole="tblUserData" />
         </EntityType>
         <EntityType Name="tblEmployee">
           <Key>
@@ -237,10 +265,11 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
           <Property Name="UserDataID" Type="Int32" Nullable="false" />
           <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sector" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SectorID" Type="Int32" Nullable="false" />
           <Property Name="ProfessionalQualificationsLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="YearsOfService" Type="Int32" />
-          <NavigationProperty Name="tblUserData" Relationship="Self.FK__tblEmploy__UserD__108B795B" FromRole="tblEmployees" ToRole="tblUserData" />
+          <NavigationProperty Name="tblSector" Relationship="Self.FK__tblEmploy__Secto__48CFD27E" FromRole="tblEmployees" ToRole="tblSector" />
+          <NavigationProperty Name="tblUserData" Relationship="Self.FK__tblEmploy__UserD__47DBAE45" FromRole="tblEmployees" ToRole="tblUserData" />
         </EntityType>
         <EntityType Name="tblManager">
           <Key>
@@ -254,7 +283,16 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
           <Property Name="OfficeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProjectsCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="tblUserData" Relationship="Self.FK__tblManage__UserD__1367E606" FromRole="tblManagers" ToRole="tblUserData" />
+          <NavigationProperty Name="tblUserData" Relationship="Self.FK__tblManage__UserD__4BAC3F29" FromRole="tblManagers" ToRole="tblUserData" />
+        </EntityType>
+        <EntityType Name="tblSector">
+          <Key>
+            <PropertyRef Name="SectorID" />
+          </Key>
+          <Property Name="SectorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__Secto__48CFD27E" FromRole="tblSector" ToRole="tblEmployees" />
         </EntityType>
         <EntityType Name="tblUserData">
           <Key>
@@ -269,9 +307,9 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
           <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="1000" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblAdministrators" Relationship="Self.FK__tblAdmini__UserD__164452B1" FromRole="tblUserData" ToRole="tblAdministrators" />
-          <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__UserD__108B795B" FromRole="tblUserData" ToRole="tblEmployees" />
-          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__UserD__1367E606" FromRole="tblUserData" ToRole="tblManagers" />
+          <NavigationProperty Name="tblAdministrators" Relationship="Self.FK__tblAdmini__UserD__4E88ABD4" FromRole="tblUserData" ToRole="tblAdministrators" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__UserD__47DBAE45" FromRole="tblUserData" ToRole="tblEmployees" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__UserD__4BAC3F29" FromRole="tblUserData" ToRole="tblManagers" />
         </EntityType>
         <EntityType Name="vwAdministrator">
           <Key>
@@ -296,7 +334,8 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
             <PropertyRef Name="Administrator_Name" />
             <PropertyRef Name="PersonalNo" />
             <PropertyRef Name="UserDataID" />
-            <PropertyRef Name="Sector" />
+            <PropertyRef Name="SectorID" />
+            <PropertyRef Name="SectorName" />
           </Key>
           <Property Name="Administrator_Name" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PersonalNo" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
@@ -306,9 +345,10 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
           <Property Name="UserDataID" Type="Int32" Nullable="false" />
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Sector" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SectorID" Type="Int32" Nullable="false" />
           <Property Name="ProfessionalQualificationsLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="YearsOfService" Type="Int32" />
+          <Property Name="SectorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="vwManager">
           <Key>
@@ -331,7 +371,7 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
           <Property Name="OfficeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProjectsCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblAdmini__UserD__164452B1">
+        <Association Name="FK__tblAdmini__UserD__4E88ABD4">
           <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
           <End Role="tblAdministrators" Type="Self.tblAdministrator" Multiplicity="*" />
           <ReferentialConstraint>
@@ -343,7 +383,19 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblEmploy__UserD__108B795B">
+        <Association Name="FK__tblEmploy__Secto__48CFD27E">
+          <End Role="tblSector" Type="Self.tblSector" Multiplicity="1" />
+          <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSector">
+              <PropertyRef Name="SectorID" />
+            </Principal>
+            <Dependent Role="tblEmployees">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__UserD__47DBAE45">
           <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
           <End Role="tblEmployees" Type="Self.tblEmployee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -355,7 +407,7 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblManage__UserD__1367E606">
+        <Association Name="FK__tblManage__UserD__4BAC3F29">
           <End Role="tblUserData" Type="Self.tblUserData" Multiplicity="1" />
           <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -371,19 +423,24 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
           <EntitySet Name="tblAdministrators" EntityType="Self.tblAdministrator" />
           <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
           <EntitySet Name="tblManagers" EntityType="Self.tblManager" />
+          <EntitySet Name="tblSectors" EntityType="Self.tblSector" />
           <EntitySet Name="tblUserDatas" EntityType="Self.tblUserData" />
           <EntitySet Name="vwAdministrators" EntityType="Self.vwAdministrator" />
           <EntitySet Name="vwEmployees" EntityType="Self.vwEmployee" />
           <EntitySet Name="vwManagers" EntityType="Self.vwManager" />
-          <AssociationSet Name="FK__tblAdmini__UserD__164452B1" Association="Self.FK__tblAdmini__UserD__164452B1">
+          <AssociationSet Name="FK__tblAdmini__UserD__4E88ABD4" Association="Self.FK__tblAdmini__UserD__4E88ABD4">
             <End Role="tblUserData" EntitySet="tblUserDatas" />
             <End Role="tblAdministrators" EntitySet="tblAdministrators" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblEmploy__UserD__108B795B" Association="Self.FK__tblEmploy__UserD__108B795B">
+          <AssociationSet Name="FK__tblEmploy__Secto__48CFD27E" Association="Self.FK__tblEmploy__Secto__48CFD27E">
+            <End Role="tblSector" EntitySet="tblSectors" />
+            <End Role="tblEmployees" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__UserD__47DBAE45" Association="Self.FK__tblEmploy__UserD__47DBAE45">
             <End Role="tblUserData" EntitySet="tblUserDatas" />
             <End Role="tblEmployees" EntitySet="tblEmployees" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblManage__UserD__1367E606" Association="Self.FK__tblManage__UserD__1367E606">
+          <AssociationSet Name="FK__tblManage__UserD__4BAC3F29" Association="Self.FK__tblManage__UserD__4BAC3F29">
             <End Role="tblUserData" EntitySet="tblUserDatas" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
@@ -411,7 +468,7 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
                 <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="SectorID" ColumnName="SectorID" />
                 <ScalarProperty Name="ProfessionalQualificationsLevel" ColumnName="ProfessionalQualificationsLevel" />
                 <ScalarProperty Name="YearsOfService" ColumnName="YearsOfService" />
               </MappingFragment>
@@ -428,6 +485,15 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
                 <ScalarProperty Name="OfficeNumber" ColumnName="OfficeNumber" />
                 <ScalarProperty Name="ProjectsCount" ColumnName="ProjectsCount" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSectors">
+            <EntityTypeMapping TypeName="CompanyManagementModel.tblSector">
+              <MappingFragment StoreEntitySet="tblSector">
+                <ScalarProperty Name="SectorID" ColumnName="SectorID" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -472,9 +538,10 @@ warning 6002: The table/view 'CompanyManagement.dbo.vwManagers' does not have a 
                 <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
-                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="SectorID" ColumnName="SectorID" />
                 <ScalarProperty Name="ProfessionalQualificationsLevel" ColumnName="ProfessionalQualificationsLevel" />
                 <ScalarProperty Name="YearsOfService" ColumnName="YearsOfService" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

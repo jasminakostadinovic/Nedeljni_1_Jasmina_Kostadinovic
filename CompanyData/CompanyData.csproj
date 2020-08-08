@@ -53,70 +53,59 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Interfaces\ICompanyRepository.cs" />
     <Compile Include="Interfaces\ICompanyValidations.cs" />
-    <Compile Include="Models\CompanyDataModel.Context.cs">
+    <Compile Include="Models\CompanyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CompanyDataModel.Context.tt</DependentUpon>
+      <DependentUpon>CompanyModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CompanyDataModel.cs">
+    <Compile Include="Models\CompanyModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CompanyDataModel.tt</DependentUpon>
+      <DependentUpon>CompanyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CompanyDataModel.Designer.cs">
+    <Compile Include="Models\CompanyModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CompanyDataModel.edmx</DependentUpon>
+      <DependentUpon>CompanyModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\tblAdministrator.cs">
-      <DependentUpon>CompanyDataModel.tt</DependentUpon>
+      <DependentUpon>CompanyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblEmployee.cs">
-      <DependentUpon>CompanyDataModel.tt</DependentUpon>
+      <DependentUpon>CompanyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblManager.cs">
-      <DependentUpon>CompanyDataModel.tt</DependentUpon>
+      <DependentUpon>CompanyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSector.cs">
+      <DependentUpon>CompanyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblUserData.cs">
-      <DependentUpon>CompanyDataModel.tt</DependentUpon>
+      <DependentUpon>CompanyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vwAdministrator.cs">
-      <DependentUpon>CompanyDataModel.tt</DependentUpon>
+      <DependentUpon>CompanyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vwEmployee.cs">
-      <DependentUpon>CompanyDataModel.tt</DependentUpon>
+      <DependentUpon>CompanyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\vwManager.cs">
-      <DependentUpon>CompanyDataModel.tt</DependentUpon>
+      <DependentUpon>CompanyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CompanyDBRepository.cs" />
     <Compile Include="Validations\CompanyValidations.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\CompanyDataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CompanyDataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Models\CompanyDataModel.edmx.diagram">
-      <DependentUpon>CompanyDataModel.edmx</DependentUpon>
+    <EntityDeploy Include="Models\CompanyModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CompanyModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\CompanyModel.edmx.diagram">
+      <DependentUpon>CompanyModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\CompanyDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CompanyDataModel.Context.cs</LastGenOutput>
-      <DependentUpon>CompanyDataModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\CompanyDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CompanyDataModel.edmx</DependentUpon>
-      <LastGenOutput>CompanyDataModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -126,6 +115,18 @@
       <Project>{B0011075-24D6-4760-A3EA-649B6BCF451C}</Project>
       <Name>Validations</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\CompanyModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CompanyModel.edmx</DependentUpon>
+      <LastGenOutput>CompanyModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CompanyModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CompanyModel.edmx</DependentUpon>
+      <LastGenOutput>CompanyModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

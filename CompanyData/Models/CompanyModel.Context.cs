@@ -28,6 +28,7 @@ namespace CompanyData.Models
         public virtual DbSet<tblAdministrator> tblAdministrators { get; set; }
         public virtual DbSet<tblEmployee> tblEmployees { get; set; }
         public virtual DbSet<tblManager> tblManagers { get; set; }
+        public virtual DbSet<tblSector> tblSectors { get; set; }
         public virtual DbSet<tblUserData> tblUserDatas { get; set; }
         public virtual DbSet<vwAdministrator> vwAdministrators { get; set; }
         public virtual DbSet<vwEmployee> vwEmployees { get; set; }

@@ -12,17 +12,19 @@ namespace CompanyData.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblEmployee
+    public partial class tblSector
     {
-        public int EmployeeID { get; set; }
-        public int UserDataID { get; set; }
-        public Nullable<decimal> Salary { get; set; }
-        public string Position { get; set; }
-        public int SectorID { get; set; }
-        public string ProfessionalQualificationsLevel { get; set; }
-        public Nullable<int> YearsOfService { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblSector()
+        {
+            this.tblEmployees = new HashSet<tblEmployee>();
+        }
     
-        public virtual tblSector tblSector { get; set; }
-        public virtual tblUserData tblUserData { get; set; }
+        public int SectorID { get; set; }
+        public string SectorName { get; set; }
+        public string Description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblEmployee> tblEmployees { get; set; }
     }
 }

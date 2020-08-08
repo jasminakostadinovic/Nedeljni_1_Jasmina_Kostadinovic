@@ -256,6 +256,29 @@ namespace CompanyData.Repositories
             }
         }
 
+        public List<tblSector> LoadSectors()
+        {
+            try
+            {
+                using (var conn = new CompanyManagementEntities())
+                {
+                    var sectors = new List<tblSector>();
+                    if (conn.tblSectors.Any())
+                    {
+                        foreach (var item in conn.tblSectors)
+                        {
+                            sectors.Add(item);
+                        }
+                    }
+                    return sectors;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public bool TryDeleteManager(int managerID)
         {
             try
@@ -317,7 +340,7 @@ namespace CompanyData.Repositories
                         employeeToUpdate.Position = employee.Position;
                         employeeToUpdate.ProfessionalQualificationsLevel = employee.ProfessionalQualificationsLevel;
                         employeeToUpdate.Salary = employee.Salary;
-                        employeeToUpdate.Sector = employee.Sector;
+                        employeeToUpdate.SectorID = employee.SectorID;
                         employeeToUpdate.YearsOfService = employee.YearsOfService;
                         conn.SaveChanges();
                         return true;
@@ -385,6 +408,11 @@ namespace CompanyData.Repositories
             {
                 return false;
             }
+        }
+
+        public bool TryAddNewEmployee(tblManager manager)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net.Mail;
 
 namespace DataValidations
 {
@@ -46,6 +47,24 @@ namespace DataValidations
             if (!DateTime.TryParse(dateFromInput, culture, styles, out dateValue))
                 return false;
             return true;
+        }
+
+        public bool IsValidEmail(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

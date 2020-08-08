@@ -1,6 +1,8 @@
 ﻿using Company_app.Command;
 using Company_app.View.User;
+using CompanyData.Repositories;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -10,10 +12,11 @@ namespace Company_app.ViewModel.User
     {
 		#region Fields
 		readonly RegistrationView view;
-		#endregion
+        private readonly CompanyDBRepository db = new CompanyDBRepository();
+        #endregion
 
-		#region Constructor
-		internal RegistrationViewModel(RegistrationView view)
+        #region Constructor
+        internal RegistrationViewModel(RegistrationView view)
 		{
 			this.view = view;
 		}
@@ -50,7 +53,15 @@ namespace Company_app.ViewModel.User
         }
         private bool CanAddNewEmployee()
         {
-            return true;
+            var sectors = db.LoadSectors();
+            if (sectors == null)
+                return false;
+            else
+            {
+                if (sectors.Any())
+                    return true;
+                return false;
+            }
         }
 
 
