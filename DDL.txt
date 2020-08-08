@@ -25,6 +25,10 @@ IF  EXISTS (SELECT * FROM sys.objects
 	WHERE NAME = 'tblUserData')
 	DROP TABLE tblUserData
 
+IF  EXISTS (SELECT * FROM sys.objects 
+	WHERE NAME = 'tblSector')
+	DROP TABLE tblSector
+
 --Creating tables
 
 CREATE TABLE tblUserData
@@ -38,12 +42,17 @@ CREATE TABLE tblUserData
 	Username nvarchar(50)not null unique,
 	[Password] char(1000)not null);
 
+CREATE TABLE tblSector
+	(SectorID int primary key identity(1,1),
+	SectorName nvarchar(50) not null unique,
+	[Description] nvarchar(500));
+
 CREATE TABLE tblEmployees
 	(EmployeeID int primary key identity(1,1),
 	UserDataID int foreign key(UserDataID) references tblUserData(UserDataID) not null,
 	Salary decimal,
 	Position nvarchar(50),
-	Sector nvarchar(50)not null,
+	SectorID int foreign key(SectorID) references tblSector(SectorID) not null,
 	ProfessionalQualificationsLevel nvarchar(50),
     YearsOfService int
 	);
@@ -116,12 +125,15 @@ SELECT
 					  dbo.tblUserData.UserDataID,
 	   			      dbo.tblEmployees.Position,
 					  dbo.tblEmployees.Salary,
-					  dbo.tblEmployees.Sector,
+					  dbo.tblEmployees.SectorID,
                       dbo.tblEmployees.ProfessionalQualificationsLevel,
-                      dbo.tblEmployees.YearsOfService
+                      dbo.tblEmployees.YearsOfService,
+					  dbo.tblSector.SectorName
 
 FROM                  dbo.tblEmployees INNER JOIN
-                      dbo.tblUserData ON dbo.tblEmployees.UserDataID = dbo.tblUserData.UserDataID;
+                      dbo.tblUserData ON dbo.tblEmployees.UserDataID = dbo.tblUserData.UserDataID
+					  INNER JOIN
+					  dbo.tblSector ON dbo.tblEmployees.SectorID = dbo.tblSector.SectorID;
 
 GO
 
