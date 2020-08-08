@@ -8,10 +8,10 @@ namespace Company_app.View.User
     /// </summary>
     public partial class RegistrationView : Window
     {
-        public RegistrationView()
+        public RegistrationView(bool canAddManager)
         {
             InitializeComponent();
-            this.DataContext = new RegistrationViewModel(this);
+            this.DataContext = new RegistrationViewModel(this, canAddManager);
         }
     }
 }

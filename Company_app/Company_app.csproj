@@ -72,7 +72,9 @@
     <Compile Include="ViewModel\Master\MasterViewModel.cs" />
     <Compile Include="ViewModel\Master\UpdateExpirationAccountDateViewModel.cs" />
     <Compile Include="ViewModel\User\AddNewEmployeeViewModel.cs" />
+    <Compile Include="ViewModel\User\AddNewManagerEvaluationViewModel.cs" />
     <Compile Include="ViewModel\User\AddNewManagerViewModel.cs" />
+    <Compile Include="ViewModel\User\ConfirmOperationViewModel.cs" />
     <Compile Include="ViewModel\User\RegistrateViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\WarningViewModel.cs" />
@@ -88,8 +90,14 @@
     <Compile Include="View\User\AddNewEmployeeView.xaml.cs">
       <DependentUpon>AddNewEmployeeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\User\AddNewManagerEvaluationView.xaml.cs">
+      <DependentUpon>AddNewManagerEvaluationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\User\AddNewManagerView.xaml.cs">
       <DependentUpon>AddNewManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\ConfirmOperationView.xaml.cs">
+      <DependentUpon>ConfirmOperationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\User\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
@@ -126,7 +134,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\User\AddNewManagerEvaluationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\User\AddNewManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\User\ConfirmOperationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

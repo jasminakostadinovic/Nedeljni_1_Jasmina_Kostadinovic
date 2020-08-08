@@ -406,6 +406,8 @@ namespace Company_app.ViewModel.User
                     {
                         Logger.Instance.LogCRUD($"[{DateTime.Now.ToString("dd.MM.yyyy hh: mm")}] Created new manager with Personal Number : '{PersonalNo}'");
                     }
+                    var login = new MainWindow();
+                    login.Show();
                     addNewManagerView.Close();
                     return;
                 }
@@ -438,6 +440,8 @@ namespace Company_app.ViewModel.User
 
         private void ExitExecute()
         {
+            var login = new MainWindow();
+            login.Show();
             IsAddedNewManager = false;
             addNewManagerView.Close();
         }

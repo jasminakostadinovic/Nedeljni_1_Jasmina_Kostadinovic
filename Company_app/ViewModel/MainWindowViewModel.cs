@@ -115,7 +115,7 @@ namespace Company_app.ViewModel
 
 		private void Registrate(object obj)
 		{
-			RegistrationView registrateView = new RegistrationView();
+			RegistrationView registrateView = new RegistrationView(true);
 			loginView.Close();
 			registrateView.Show();
 			return;

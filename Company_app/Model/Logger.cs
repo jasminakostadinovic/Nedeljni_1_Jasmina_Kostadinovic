@@ -53,5 +53,18 @@ namespace Company_app.Model
                 sw.WriteLine(message);
             }
         }
+
+        public List<string> GetManagerCodes()
+        {
+            try
+            {
+                return File.ReadAllLines(managerFilePath).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<string>();
+            }
+           
+        }
     }
 }

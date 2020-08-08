@@ -13,18 +13,21 @@ namespace Company_app.ViewModel.User
 		#region Fields
 		readonly RegistrationView view;
         private readonly CompanyDBRepository db = new CompanyDBRepository();
+        private bool canAdd;
         #endregion
 
         #region Constructor
-        internal RegistrationViewModel(RegistrationView view)
+        internal RegistrationViewModel(RegistrationView view, bool canAddManager)
 		{
 			this.view = view;
-		}
+            canAdd = canAddManager;
+
+        }
         #endregion
 
         #region Commands
 
-        //adding new patient
+        //adding new employee
 
         private ICommand addNewEmployee;
         public ICommand AddNewEmployee
@@ -45,6 +48,7 @@ namespace Company_app.ViewModel.User
             {
                 AddNewEmployeeView addNewEmployeeView = new AddNewEmployeeView();
                 addNewEmployeeView.ShowDialog();
+                view.Close();
             }
             catch (Exception ex)
             {
@@ -65,7 +69,7 @@ namespace Company_app.ViewModel.User
         }
 
 
-        //adding new patient
+        //adding new manager
 
         private ICommand addNewManager;
         public ICommand AddNewManager
@@ -84,8 +88,9 @@ namespace Company_app.ViewModel.User
         {
             try
             {
-                AddNewManagerView addNewManagerViewView = new AddNewManagerView();
-                addNewManagerViewView.ShowDialog();
+                ConfirmOperationView confirmOperationView = new ConfirmOperationView();
+                confirmOperationView.Show();
+                view.Close();
             }
             catch (Exception ex)
             {
@@ -94,7 +99,7 @@ namespace Company_app.ViewModel.User
         }
         private bool CanAddNewManager()
         {
-            return true;
+            return canAdd;
         }
 
 

@@ -440,6 +440,8 @@ namespace Company_app.ViewModel.User
                     {
                         Logger.Instance.LogCRUD($"[{DateTime.Now.ToString("dd.MM.yyyy hh: mm")}] Created new employee with Personal Number : '{PersonalNo}'");
                     }
+                    var login = new MainWindow();
+                    login.Show();
                     addNewEmployeeView.Close();
                     return;
                 }
@@ -472,6 +474,8 @@ namespace Company_app.ViewModel.User
 
         private void ExitExecute()
         {
+            var login = new MainWindow();
+            login.Show();
             IsAddedNewEmployee = false;
             addNewEmployeeView.Close();
         }
