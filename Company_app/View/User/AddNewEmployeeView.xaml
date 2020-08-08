@@ -3,10 +3,128 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Company_app.View.User"
-        mc:Ignorable="d"
-        Title="AddNewEmployeeView" Height="450" Width="800">
+     mc:Ignorable="d"
+   Title="Add New Employee"  Height="400" Width="450" Background="#2e3137" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+
+          Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="1" Grid.Row="1" Name="lblGivenName" Content="Given Name:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="3" Name="lblSurname" Content="Surname:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="5" Name="lblPersonalNo" Content="Personal Number:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="7" Name="lblSex" Content="Sex:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="9" Name="lblPlaceOfResidence" Content="Place Of Residence:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="11" Name="lblMaritalStatus" Content="Marital Status:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="13" Name="lblUsername" Content="Username:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="15" Name="lblPassword" Content="Password:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="17" Name="lblPosition" Content="Position:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="19" Name="lblSector" Content="Sector:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="21" Name="lblProfessionalQualificationsLevel" Content="Professional Qualifications Level:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+        <Label Grid.Column="1" Grid.Row="23" Name="lblYearsOfService" Content="Years of Service:" Padding="0" HorizontalAlignment="Right" Foreground="White"/>
+
+        <TextBox Grid.Column="3" Grid.Row="1" Name="txtClientGivenName" Height="20" MinWidth="200"
+                 TextWrapping="Wrap"
+                 Text="{Binding GivenName, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBox Grid.Column="3" Grid.Row="3" Name="txtClientSurname" Height="20" MinWidth="200"
+                 TextWrapping="Wrap"
+                 Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBox Grid.Column="3" Grid.Row="5" Name="txtClientPersonalNo" Height="20" MinWidth="200"
+                 TextWrapping="Wrap"
+                 Text="{Binding PersonalNo, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+        <ComboBox Grid.Column="3" Grid.Row="7" Name="cmbSex" Height="20" Width="auto" 
+                 IsEditable="True" ItemsSource="{Binding SexTypes, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Sex, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBox Grid.Column="3" Grid.Row="9" Name="txtPlaceOfResidence" Height="20" MinWidth="200"
+                 TextWrapping="Wrap"
+                 Text="{Binding PlaceOfResidence, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+        <ComboBox Grid.Column="3" Grid.Row="11" Name="cmbMaritalStatus" Height="20" Width="auto" 
+                 IsEditable="True" ItemsSource="{Binding MaritalStatusTypes, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding MaritalStatus, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBox Grid.Column="3" Grid.Row="13" Name="txtUsername" Height="20" MinWidth="200"
+                 TextWrapping="Wrap"
+                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+        <TextBox Grid.Column="3" Grid.Row="15" Name="txtPassword" Height="20" MinWidth="200"
+                 TextWrapping="Wrap"
+                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        <ComboBox Grid.Column="3" Grid.Row="17" Name="cmbAdministratorTeam" Height="20" Width="auto" 
+                 IsEditable="True" ItemsSource="{Binding Positions, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Position, UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox Grid.Column="3" Grid.Row="19" Name="cmbSector" Height="20" Width="auto" 
+                 IsEditable="True" ItemsSource="{Binding Sectors, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Sector, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="3" Grid.Row="21" Name="txty" Height="20" MinWidth="200"
+                 TextWrapping="Wrap"
+                 Text="{Binding ProfessionalQualificationsLevel, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        <TextBox Grid.Column="3" Grid.Row="23" Name="txtPQL" Height="20" MinWidth="200"
+                 TextWrapping="Wrap"
+                 Text="{Binding YearsOfService, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+        <Button Grid.Column="3" Grid.Row="25" Name="btnSave" Content="Save" Height="20" Width="70" HorizontalAlignment="Right"
+                Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}" Background="#545d6a" Foreground="White"  />
+
+        <Button Grid.Column="1" Grid.Row="25" Name="btnExit" Content="Exit" Height="20" Width="70" HorizontalAlignment="Left"
+                Command="{Binding Exit, UpdateSourceTrigger=PropertyChanged}" Background="#545d6a" Foreground="White" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

@@ -326,7 +326,7 @@ namespace Company_app.ViewModel.User
                         CanSave = false;
                     }
                 }
-                else if (name == nameof(passwordHint))
+                else if (name == nameof(PasswordHint))
                 {
                     if (PasswordHint.Length < 5)
                     {
