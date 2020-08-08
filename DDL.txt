@@ -10,12 +10,12 @@ USE CompanyManagement;
 --Droping tables
 
 IF  EXISTS (SELECT * FROM sys.objects 
-	WHERE NAME = 'tblManagers')
-	DROP TABLE tblManagers
-
-IF  EXISTS (SELECT * FROM sys.objects 
 	WHERE NAME = 'tblEmployees')
 	DROP TABLE tblEmployees
+
+IF  EXISTS (SELECT * FROM sys.objects 
+	WHERE NAME = 'tblManagers')
+	DROP TABLE tblManagers
 
 IF  EXISTS (SELECT * FROM sys.objects 
 	WHERE NAME = 'tblAdministrators')
@@ -47,16 +47,6 @@ CREATE TABLE tblSector
 	SectorName nvarchar(50) not null unique,
 	[Description] nvarchar(500));
 
-CREATE TABLE tblEmployees
-	(EmployeeID int primary key identity(1,1),
-	UserDataID int foreign key(UserDataID) references tblUserData(UserDataID) not null,
-	Salary decimal,
-	Position nvarchar(50),
-	SectorID int foreign key(SectorID) references tblSector(SectorID) not null,
-	ProfessionalQualificationsLevel nvarchar(50),
-    YearsOfService int
-	);
-
 CREATE TABLE tblManagers
 	(ManagerID int primary key identity(1,1),
 	UserDataID int foreign key(UserDataID) references tblUserData(UserDataID) not null,
@@ -66,6 +56,17 @@ CREATE TABLE tblManagers
 	OfficeNumber  nvarchar(50) not null,
 	ProjectsCount nvarchar(50)not null,
 	Salary decimal);
+
+CREATE TABLE tblEmployees
+	(EmployeeID int primary key identity(1,1),
+	UserDataID int foreign key(UserDataID) references tblUserData(UserDataID) not null,
+    ManagerID int foreign key(ManagerID) references tblManagers(ManagerID) not null,
+	Salary decimal,
+	Position nvarchar(50),
+	SectorID int foreign key(SectorID) references tblSector(SectorID) not null,
+	ProfessionalQualificationsLevel nvarchar(50),
+    YearsOfService int
+	);
 
 CREATE TABLE tblAdministrators
 	(AdministratorID int primary key identity(1,1),
@@ -117,7 +118,7 @@ CREATE VIEW [dbo].[vwEmployees]
 AS
 SELECT   
   TOP (100) PERCENT 
-                       dbo.tblUserData.GivenName + ' ' + dbo.tblUserData.Surname AS [Administrator Name], 
+                       dbo.tblUserData.GivenName + ' ' + dbo.tblUserData.Surname AS [Employee Name], 
 					  dbo.tblUserData.PersonalNo,
 	   			      dbo.tblUserData.Sex,
 					  dbo.tblUserData.PlaceOfResidence,
@@ -126,6 +127,7 @@ SELECT
 	   			      dbo.tblEmployees.Position,
 					  dbo.tblEmployees.Salary,
 					  dbo.tblEmployees.SectorID,
+                      dbo.tblEmployees.ManagerID,
                       dbo.tblEmployees.ProfessionalQualificationsLevel,
                       dbo.tblEmployees.YearsOfService,
 					  dbo.tblSector.SectorName
@@ -146,7 +148,7 @@ CREATE VIEW [dbo].[vwManagers]
 AS
 SELECT   
   TOP (100) PERCENT 
-                       dbo.tblUserData.GivenName + ' ' + dbo.tblUserData.Surname AS [Administrator Name], 
+                       dbo.tblUserData.GivenName + ' ' + dbo.tblUserData.Surname AS [Manager Name], 
 					  dbo.tblUserData.PersonalNo,
 	   			      dbo.tblUserData.Sex,
 					  dbo.tblUserData.PlaceOfResidence,
