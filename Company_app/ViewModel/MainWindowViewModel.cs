@@ -78,7 +78,10 @@ namespace Company_app.ViewModel
 				{
 					var typeOfUser = validateCompanyData.GetUserType(userDataId);
 					if (typeOfUser == nameof(tblManager))
-					{					
+					{
+						var notImplemented = new NotImplemntedView();
+						notImplemented.Show();
+						loginView.Close();
 						return;
 					}
 					if (typeOfUser == nameof(tblAdministrator))
@@ -92,6 +95,9 @@ namespace Company_app.ViewModel
 					}
 					if (typeOfUser == nameof(tblEmployee))
 					{
+						var notImplemented = new NotImplemntedView();
+						notImplemented.Show();
+						loginView.Close();
 						return;
 					}
 				}					

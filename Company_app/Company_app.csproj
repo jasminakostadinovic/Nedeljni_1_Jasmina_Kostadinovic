@@ -74,6 +74,7 @@
     <Compile Include="ViewModel\Master\AddNewAdministratorViewModel.cs" />
     <Compile Include="ViewModel\Master\MasterViewModel.cs" />
     <Compile Include="ViewModel\Master\UpdateExpirationAccountDateViewModel.cs" />
+    <Compile Include="ViewModel\NotImplemntedViewModel.cs" />
     <Compile Include="ViewModel\Register\AddNewEmployeeViewModel.cs" />
     <Compile Include="ViewModel\Register\AddNewManagerEvaluationViewModel.cs" />
     <Compile Include="ViewModel\Register\AddNewManagerViewModel.cs" />
@@ -98,6 +99,9 @@
     </Compile>
     <Compile Include="View\Master\UpdateExpirationAccountDateView.xaml.cs">
       <DependentUpon>UpdateExpirationAccountDateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NotImplemntedView.xaml.cs">
+      <DependentUpon>NotImplemntedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Register\AddNewEmployeeView.xaml.cs">
       <DependentUpon>AddNewEmployeeView.xaml</DependentUpon>
@@ -151,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Master\UpdateExpirationAccountDateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NotImplemntedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

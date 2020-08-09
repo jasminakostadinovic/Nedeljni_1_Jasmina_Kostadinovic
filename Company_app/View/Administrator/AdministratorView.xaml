@@ -27,7 +27,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Name="btnUpdate" Content="Update"  HorizontalAlignment="Left"
+                                <Button Name="btnUpdate" Content="Delete"  HorizontalAlignment="Left"
                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
                                               Path=DataContext.Delete}"
                             CommandParameter="{Binding}"/>

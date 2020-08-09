@@ -64,7 +64,7 @@ namespace Company_app.ViewModel.Administrator
         #endregion
         #region Commands
 
-        //adding new administrator
+        //adding new sector
 
         private ICommand addNewSector;
         public ICommand AddNewSector
@@ -104,18 +104,18 @@ namespace Company_app.ViewModel.Administrator
             return false;
         }
 
-        //Update administrator ExpirationAccountDate
+        //Deleting sector
 
-        private ICommand Delete;
-        public ICommand delete
+        private ICommand delete;
+        public ICommand Delete
         {
             get
             {
-                if (Delete == null)
+                if (delete == null)
                 {
-                    Delete = new RelayCommand(param => DeleteExecute(), param => CanDelete());
+                    delete = new RelayCommand(param => DeleteExecute(), param => CanDelete());
                 }
-                return Delete;
+                return delete;
             }
         }
 

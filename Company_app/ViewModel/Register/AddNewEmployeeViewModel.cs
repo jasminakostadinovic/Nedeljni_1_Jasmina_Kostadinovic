@@ -429,32 +429,37 @@ namespace Company_app.ViewModel.User
         {
             try
             {
-                userData.GivenName = GivenName;
-                userData.Surname = Surname;
-                userData.PersonalNo = PersonalNo;
-                userData.Sex = Sex;
-                userData.PlaceOfResidence = PlaceOfResidence;
-                userData.MaritalStatus = MaritalStatus;
-                userData.Username = Username;
-                userData.Password = SecurePasswordHasher.Hash(Password);
-
-                //adding new employee to database 
-                db.TryAddNewUserData(userData);
-                var userId = db.GetUserDataId(Username);
-                if (userId != 0)
+                var login = new MainWindow();
+                var managers = db.LoadManagers();
+                if (managers == null)
                 {
-                    employee.Position = Position;
-                    employee.YearsOfService = yearsOfServiceValue;
-                    employee.UserDataID = userId;
-                    employee.SectorID = sector.SectorID;
-                    employee.ProfessionalQualificationsLevel = ProfessionalQualificationsLevel;
-                    var managers = db.LoadManagers();
-                    if(managers == null)
+                    MessageBox.Show("Something went wrong. New employee is not created.");
+                    login.Show();
+                    addNewEmployeeView.Close();
+                    return;
+                }
+                else
+                {
+                    userData.GivenName = GivenName;
+                    userData.Surname = Surname;
+                    userData.PersonalNo = PersonalNo;
+                    userData.Sex = Sex;
+                    userData.PlaceOfResidence = PlaceOfResidence;
+                    userData.MaritalStatus = MaritalStatus;
+                    userData.Username = Username;
+                    userData.Password = SecurePasswordHasher.Hash(Password);
+
+                    //adding new employee to database 
+                    db.TryAddNewUserData(userData);
+                    var userId = db.GetUserDataId(Username);
+                    if (userId != 0)
                     {
-                        MessageBox.Show("Something went wrong. New employee is not created.");
-                    }
-                    else
-                    {
+                        employee.Position = Position;
+                        employee.YearsOfService = yearsOfServiceValue;
+                        employee.UserDataID = userId;
+                        employee.SectorID = sector.SectorID;
+                        employee.ProfessionalQualificationsLevel = ProfessionalQualificationsLevel;
+
                         if (managers.Any())
                         {
                             int index = random.Next(0, managers.Count);
@@ -472,13 +477,11 @@ namespace Company_app.ViewModel.User
                         {
                             MessageBox.Show("You can not create the new employee account at the moment.");
                         }
-                    }
-
-                
-                    var login = new MainWindow();
-                    login.Show();
-                    addNewEmployeeView.Close();
-                    return;
+                    
+                        login.Show();
+                        addNewEmployeeView.Close();
+                        return;
+                    }              
                 }
             }
             catch (Exception ex)

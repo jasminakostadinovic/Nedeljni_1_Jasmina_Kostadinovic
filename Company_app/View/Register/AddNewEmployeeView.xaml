@@ -114,9 +114,10 @@ Path=(Validation.Errors)[0].ErrorContent}"/>
         <ComboBox Grid.Column="3" Grid.Row="19" Name="cmbSector" Height="20" Width="auto" 
                  IsEditable="True" ItemsSource="{Binding Sectors, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding Sector, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="SectorName"/>
-        <TextBox Grid.Column="3" Grid.Row="21" Name="txty" Height="20" MinWidth="200"
-                 TextWrapping="Wrap"
-                 Text="{Binding ProfessionalQualificationsLevel, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+        <ComboBox Grid.Column="3" Grid.Row="21" Name="txty" Height="20" Width="auto" 
+                 IsEditable="True" ItemsSource="{Binding ProfessionalQualificationsLevels, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding ProfessionalQualificationsLevel, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="3" Grid.Row="23" Name="txtPQL" Height="20" MinWidth="200"
                  TextWrapping="Wrap"
                  Text="{Binding YearsOfService, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>

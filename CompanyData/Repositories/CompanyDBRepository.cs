@@ -148,7 +148,7 @@ namespace CompanyData.Repositories
                     {
                         if(conn.tblEmployees.Any(x => x.SectorID == sectorID))
                         {
-                            var employees = conn.tblEmployees.Where(x => x.SectorID == sectorID);
+                            var employees = conn.tblEmployees.Where(x => x.SectorID == sectorID).ToList();
                             int id = GetIdofDefaultSector();
                             foreach (var item in employees)
                             {
@@ -157,8 +157,9 @@ namespace CompanyData.Repositories
                                     item.SectorID = id;
                                 }
                                 else
-                                    return false;                              
+                                    return false;       
                             }
+                            conn.SaveChanges();
                             conn.tblSectors.Remove(sectorToRemove);
                             conn.SaveChanges();
                             return true;
@@ -167,7 +168,7 @@ namespace CompanyData.Repositories
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }
