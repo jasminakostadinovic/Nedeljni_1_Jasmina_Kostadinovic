@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CompanyData.Repositories
@@ -148,18 +149,7 @@ namespace CompanyData.Repositories
                     {
                         if(conn.tblEmployees.Any(x => x.SectorID == sectorID))
                         {
-                            var employees = conn.tblEmployees.Where(x => x.SectorID == sectorID).ToList();
-                            int id = GetIdofDefaultSector();
-                            foreach (var item in employees)
-                            {
-                                if (id != 0)
-                                {
-                                    item.SectorID = id;
-                                }
-                                else
-                                    return false;       
-                            }
-                            conn.SaveChanges();
+                            ChangeEmployeesSectorToDefault(sectorID);
                             conn.tblSectors.Remove(sectorToRemove);
                             conn.SaveChanges();
                             return true;
@@ -175,6 +165,28 @@ namespace CompanyData.Repositories
                 }
             }
             catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        private bool ChangeEmployeesSectorToDefault(int sectorID)
+        {
+            try
+            {
+                using (var conn = new CompanyManagementEntities())
+                {
+                    var employees = conn.tblEmployees.Where(x => x.SectorID == sectorID).ToList();
+                    int id = GetIdofDefaultSector();
+                    foreach (var item in employees)
+                    {
+                        item.SectorID = id;
+                    }
+                    conn.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception)
             {
                 return false;
             }

@@ -22,7 +22,7 @@ namespace CompanyData.Models
         public int UserDataID { get; set; }
         public string Position { get; set; }
         public Nullable<decimal> Salary { get; set; }
-        public int SectorID { get; set; }
+        public Nullable<int> SectorID { get; set; }
         public int ManagerID { get; set; }
         public string ProfessionalQualificationsLevel { get; set; }
         public Nullable<int> YearsOfService { get; set; }

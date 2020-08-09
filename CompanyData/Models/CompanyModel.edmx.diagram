@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="02839d0f8e9344f9ade2e8bf8303cc94" Name="Diagram1">
+      <Diagram DiagramId="ff1b3bdb764d491b88d2d838f508d063" Name="Diagram1">
         <EntityTypeShape EntityType="CompanyManagementModel.tblAdministrator" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CompanyManagementModel.tblEmployee" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="CompanyManagementModel.tblManager" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
@@ -13,11 +13,11 @@
         <EntityTypeShape EntityType="CompanyManagementModel.vwAdministrator" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CompanyManagementModel.vwEmployee" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CompanyManagementModel.vwManager" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="CompanyManagementModel.FK__tblAdmini__UserD__55009F39" ManuallyRouted="false" />
-        <AssociationConnector Association="CompanyManagementModel.FK__tblEmploy__Manag__51300E55" ManuallyRouted="false" />
-        <AssociationConnector Association="CompanyManagementModel.FK__tblEmploy__Secto__5224328E" ManuallyRouted="false" />
-        <AssociationConnector Association="CompanyManagementModel.FK__tblEmploy__UserD__503BEA1C" ManuallyRouted="false" />
-        <AssociationConnector Association="CompanyManagementModel.FK__tblManage__UserD__4D5F7D71" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyManagementModel.FK__tblAdmini__UserD__4D2A7347" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyManagementModel.FK__tblEmploy__Manag__4959E263" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyManagementModel.FK__tblEmploy__Secto__4A4E069C" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyManagementModel.FK__tblEmploy__UserD__4865BE2A" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyManagementModel.FK__tblManage__UserD__4589517F" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
