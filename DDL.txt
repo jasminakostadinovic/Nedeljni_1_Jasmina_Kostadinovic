@@ -1,0 +1,168 @@
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].CompanyManagement'))
+DROP DATABASE CompanyManagement;
+
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE NAME = 'CompanyManagement')
+	CREATE DATABASE CompanyManagement;
+
+GO
+USE CompanyManagement;
+
+--Droping tables
+
+IF  EXISTS (SELECT * FROM sys.objects 
+	WHERE NAME = 'tblEmployees')
+	DROP TABLE tblEmployees
+
+IF  EXISTS (SELECT * FROM sys.objects 
+	WHERE NAME = 'tblManagers')
+	DROP TABLE tblManagers
+
+IF  EXISTS (SELECT * FROM sys.objects 
+	WHERE NAME = 'tblAdministrators')
+	DROP TABLE tblAdministrators
+
+IF  EXISTS (SELECT * FROM sys.objects 
+	WHERE NAME = 'tblUserData')
+	DROP TABLE tblUserData
+
+IF  EXISTS (SELECT * FROM sys.objects 
+	WHERE NAME = 'tblSector')
+	DROP TABLE tblSector
+
+--Creating tables
+
+CREATE TABLE tblUserData
+	(UserDataID int primary key identity(1,1),
+	GivenName nvarchar(50) not null,
+	Surname nvarchar(50) not null,
+    PersonalNo nvarchar(13) unique not null,
+    Sex nvarchar(50),
+    PlaceOfResidence nvarchar(50),
+    MaritalStatus nvarchar(50),	
+	Username nvarchar(50)not null unique,
+	[Password] char(1000)not null);
+
+CREATE TABLE tblSector
+	(SectorID int primary key identity(1,1),
+	SectorName nvarchar(50) not null unique,
+	[Description] nvarchar(500));
+
+CREATE TABLE tblManagers
+	(ManagerID int primary key identity(1,1),
+	UserDataID int foreign key(UserDataID) references tblUserData(UserDataID) not null,
+    LevelOfResponsibility int,
+    PasswordHint char(1000)not null,
+    Email nvarchar(50)not null,
+	OfficeNumber  nvarchar(50) not null,
+	ProjectsCount nvarchar(50)not null,
+	Salary decimal);
+
+CREATE TABLE tblEmployees
+	(EmployeeID int primary key identity(1,1),
+	UserDataID int foreign key(UserDataID) references tblUserData(UserDataID) not null,
+    ManagerID int foreign key(ManagerID) references tblManagers(ManagerID) not null,
+	Salary decimal,
+	Position nvarchar(50),
+	SectorID int foreign key(SectorID) references tblSector(SectorID) not null,
+	ProfessionalQualificationsLevel nvarchar(50),
+    YearsOfService int
+	);
+
+CREATE TABLE tblAdministrators
+	(AdministratorID int primary key identity(1,1),
+	UserDataID int foreign key(UserDataID) references tblUserData(UserDataID) not null,
+    ExpirationAccountDate datetime not null,
+    AdministratorTeam nvarchar(50));
+
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vwAdministrators]'))
+DROP VIEW [dbo].[vwAdministrators]
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vwEmployees]'))
+DROP VIEW [dbo].[vwEmployees]
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vwManagers]'))
+DROP VIEW [dbo].[vwManagers]
+
+--creating view	
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[vwAdministrators]
+AS
+SELECT   
+  TOP (100) PERCENT 
+                      dbo.tblUserData.GivenName + ' ' + dbo.tblUserData.Surname AS [Administrator Name], 
+					  dbo.tblUserData.PersonalNo,
+	   			      dbo.tblUserData.Sex,
+					  dbo.tblUserData.PlaceOfResidence,
+					  dbo.tblUserData.MaritalStatus,					
+					  dbo.tblUserData.UserDataID,
+					  dbo.tblAdministrators.AdministratorID,
+                      dbo.tblAdministrators.ExpirationAccountDate,
+                      dbo.tblAdministrators.AdministratorTeam
+
+FROM                  dbo.tblAdministrators INNER JOIN
+                      dbo.tblUserData ON dbo.tblAdministrators.UserDataID = dbo.tblUserData.UserDataID;
+
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[vwEmployees]
+AS
+SELECT   
+  TOP (100) PERCENT 
+                       dbo.tblUserData.GivenName + ' ' + dbo.tblUserData.Surname AS [Employee Name], 
+					  dbo.tblUserData.PersonalNo,
+	   			      dbo.tblUserData.Sex,
+					  dbo.tblUserData.PlaceOfResidence,
+					  dbo.tblUserData.MaritalStatus,					
+					  dbo.tblUserData.UserDataID,
+	   			      dbo.tblEmployees.Position,
+					  dbo.tblEmployees.Salary,
+					  dbo.tblEmployees.SectorID,
+                      dbo.tblEmployees.ManagerID,
+                      dbo.tblEmployees.ProfessionalQualificationsLevel,
+                      dbo.tblEmployees.YearsOfService,
+					  dbo.tblSector.SectorName
+
+FROM                  dbo.tblEmployees INNER JOIN
+                      dbo.tblUserData ON dbo.tblEmployees.UserDataID = dbo.tblUserData.UserDataID
+					  INNER JOIN
+					  dbo.tblSector ON dbo.tblEmployees.SectorID = dbo.tblSector.SectorID;
+
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[vwManagers]
+AS
+SELECT   
+  TOP (100) PERCENT 
+                       dbo.tblUserData.GivenName + ' ' + dbo.tblUserData.Surname AS [Manager Name], 
+					  dbo.tblUserData.PersonalNo,
+	   			      dbo.tblUserData.Sex,
+					  dbo.tblUserData.PlaceOfResidence,
+					  dbo.tblUserData.MaritalStatus,					
+					  dbo.tblUserData.UserDataID,
+
+	   			      dbo.tblManagers.LevelOfResponsibility,
+					  dbo.tblManagers.Salary,
+					  dbo.tblManagers.Email ,
+                      dbo.tblManagers.OfficeNumber,
+                      dbo.tblManagers.ProjectsCount,
+                      dbo.tblManagers.ManagerID
+
+FROM                  dbo.tblManagers INNER JOIN
+                      dbo.tblUserData ON dbo.tblManagers.UserDataID = dbo.tblUserData.UserDataID;
+
+GO
