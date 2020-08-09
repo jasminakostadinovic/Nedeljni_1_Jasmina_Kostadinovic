@@ -63,7 +63,7 @@ CREATE TABLE tblEmployees
     ManagerID int foreign key(ManagerID) references tblManagers(ManagerID) not null,
 	Salary decimal,
 	Position nvarchar(50),
-	SectorID int foreign key(SectorID) references tblSector(SectorID) not null,
+	SectorID int foreign key(SectorID) references tblSector(SectorID),
 	ProfessionalQualificationsLevel nvarchar(50),
     YearsOfService int
 	);
