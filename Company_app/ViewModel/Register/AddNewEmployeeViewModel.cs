@@ -431,9 +431,9 @@ namespace Company_app.ViewModel.User
             {
                 var login = new MainWindow();
                 var managers = db.LoadManagers();
-                if (managers == null)
+                if (managers == null || !managers.Any())
                 {
-                    MessageBox.Show("Something went wrong. New employee is not created.");
+                    MessageBox.Show("You can not create the new employee account at the moment.");
                     login.Show();
                     addNewEmployeeView.Close();
                     return;
@@ -472,12 +472,7 @@ namespace Company_app.ViewModel.User
                                 Logger.Instance.LogCRUD($"[{DateTime.Now.ToString("dd.MM.yyyy hh: mm")}] Created new employee with Personal Number : '{PersonalNo}'");
                                 MessageBox.Show("You have successfully created new employee account.");
                             }
-                        }
-                        else
-                        {
-                            MessageBox.Show("You can not create the new employee account at the moment.");
-                        }
-                    
+                        }                    
                         login.Show();
                         addNewEmployeeView.Close();
                         return;

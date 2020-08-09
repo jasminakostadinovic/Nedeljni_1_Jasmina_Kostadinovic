@@ -163,7 +163,13 @@ namespace CompanyData.Repositories
                             conn.tblSectors.Remove(sectorToRemove);
                             conn.SaveChanges();
                             return true;
-                        }                  
+                        }
+                        else
+                        {
+                            conn.tblSectors.Remove(sectorToRemove);
+                            conn.SaveChanges();
+                            return true;
+                        }
                     }
                     return false;
                 }
@@ -344,6 +350,8 @@ namespace CompanyData.Repositories
                         {
                             foreach (var item in conn.tblSectors)
                             {
+                                if (item.SectorName == "Default")
+                                    continue;
                                 sectors.Add(item);
                             }
                         }
