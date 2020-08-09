@@ -87,11 +87,21 @@ namespace Company_app.ViewModel
 					if (typeOfUser == nameof(tblAdministrator))
 					{
 						var typeOfAdministrator = validateCompanyData.GetAdministratorType(userDataId);
-
-						AdministratorView administrator = new AdministratorView(typeOfAdministrator);
-						administrator.Show();
-						loginView.Close();
-						return;
+						if(typeOfAdministrator == "System")
+						{
+							AdministratorView administrator = new AdministratorView(typeOfAdministrator);
+							administrator.Show();
+							loginView.Close();
+							return;
+						}
+						else
+						{
+							var notImplemented = new NotImplemntedView();
+							notImplemented.Show();
+							loginView.Close();
+							return;
+						}
+					
 					}
 					if (typeOfUser == nameof(tblEmployee))
 					{
