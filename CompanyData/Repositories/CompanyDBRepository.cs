@@ -164,7 +164,7 @@ namespace CompanyData.Repositories
                     return false;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
